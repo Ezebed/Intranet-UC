@@ -11,6 +11,11 @@
 
 [Inserte descripcion aqu]
 
+## Requisitos
+
+PHP V8.3.^
+MySql server
+
 ## Iniciar laravel en local
 
 entramos en la carpeta del proyecto
