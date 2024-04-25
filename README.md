@@ -25,6 +25,19 @@ realizamos las migraciones de la DB
 php artisan migrate
 ```
 
+> [!IMPORTANT]  
+> en caso de utilizar la version de mysql 5 o inferioes se deberan agregar las siguientes lineas de codigo en app > Providers > AppServiceProvider.php.
+
+```php
+use Illuminate\Support\Facades\Schema;
+
+public function boot(): void
+{
+    Schema::defaultStringLength(191);
+}
+```
+
+
 iniciamos el servidor local
 
 ```bash
