@@ -65,6 +65,7 @@ php artisan migrate
 iniciamos el servidor local
 
 ```bash
+npm run dev
 php artisan serve
 ```
 
