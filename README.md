@@ -17,12 +17,21 @@
 
 > MySql server
 
+> Node.js
+
+> Composer 
+
 ## Iniciar laravel en local
 
 entramos en la carpeta del proyecto
 
 ```bash
 cd Intranet-UC
+```
+instalamos las dependencias del proyecto
+
+```bash
+npm install
 ```
 
 realizamos las migraciones de la Base de Datos MySql
