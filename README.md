@@ -19,14 +19,10 @@ entramos en la carpeta del proyecto
 cd Intranet-UC
 ```
 
-realizamos las migraciones de la DB
-
-```bash
-php artisan migrate
-```
+realizamos las migraciones de la Base de Datos MySql
 
 > [!IMPORTANT]  
-> en caso de utilizar la version de mysql 5 o inferioes se deberan agregar las siguientes lineas de codigo en app > Providers > AppServiceProvider.php.
+> En caso de utilizar la version de mysql 5 o inferiores se deberan agregar las siguientes lineas de codigo en app > Providers > AppServiceProvider.php.
 
 ```php
 use Illuminate\Support\Facades\Schema;
@@ -37,6 +33,19 @@ public function boot(): void
 }
 ```
 
+> [!IMPORTANT]
+> Copiar el archivo .env.example y borrar la extension ".example" y proporcionar las credenciales de la base de datos deacuerdo con las configuraciones de su equipo.
+
+```php
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+```
+una vez rellenada las credenciales y configurado la AppServiceProvider (solo en caso de ser necesario) migramos la base de datos
+
+```bash
+php artisan migrate
+```
 
 iniciamos el servidor local
 
