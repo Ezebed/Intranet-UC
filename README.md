@@ -31,6 +31,7 @@ cd Intranet-UC
 instalamos las dependencias del proyecto
 
 ```bash
+composer install
 npm install
 ```
 
