@@ -8,7 +8,7 @@ export default function Welcome({auth}) {
   const isAdmin = auth.permissions.find(permission => permission.name === 'isAdmin' );
 
   return (
-    <AdminLayout >
+    <AdminLayout user={auth.user} >
       <Head title="Welcome" />
       
       <div className='m-4 p-4 bg-white'>
