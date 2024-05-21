@@ -6,6 +6,9 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,9 +18,41 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $adminUser = User::factory()->create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
         ]);
+
+        User::factory()->create([
+            'name' => 'Regular User',
+            'email' => 'regular@example.com',
+        ]);
+
+        // Permissions and Roles
+        // Administrator, Director, Teacher and Administrative
+        
+        // Roles
+        $admin          = Role::create(['name' => 'admin']);
+        $director       = Role::create(['name' => 'director']);
+        $teacher        = Role::create(['name' => 'teacher']);
+        $administrative = Role::create(['name' => 'administrative']);
+
+        // Permissions
+
+        $isAdmin = Permission::create(['name' => 'isAdmin']);
+        $isDirector = Permission::create(['name' => 'isDirector']);
+        $isTeacher = Permission::create(['name' => 'isTeacher']);
+        $isAdministrative = Permission::create(['name' => 'isAdministrative']);
+
+        // Assing permissions to roles
+
+        $isAdmin->syncRoles($admin);
+        $isDirector->syncRoles([$admin, $director]);
+        $isTeacher->syncRoles([$admin, $teacher]);
+        $isAdministrative->syncRoles([$admin, $administrative]);
+
+        // assing roles to users
+
+        $adminUser->assignRole(['admin','teacher']);
     }
 }

@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth','verified'])->group(function(){
-    Route::get('/hola',function(){ return Inertia::render('holaMundo'); });
+    Route::get('/hola',function(){ return Inertia::render('holaMundo'); })->name('hola');
 });
 
 require __DIR__.'/auth.php';
