@@ -4,11 +4,14 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListSubheader from '@mui/material/ListSubheader';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 
 import TopBar from '@/_Partials/TopBar';
-
 import DrawerLink from '@/Components/DrawerLink';
+import { Link } from '@inertiajs/react';
 
 export default function AsideDrawer({user,drawerWidth})
 {
@@ -71,6 +74,26 @@ export default function AsideDrawer({user,drawerWidth})
                 >
                     <DrawerLink primary='Dashboard' routeName='dashboard' />
                     <DrawerLink primary='Hola'      routeName='hola' />
+                </List>
+                
+                {/* User's Links */}
+                <List
+                    sx={{ display:{ xs: 'block', sm: 'none' } }}
+                    subheader={
+                        <ListSubheader component="div" id="role-and-permission">
+                            <span className='ml-2 text-[#7267ef] capitalize'>{user.name}</span>
+                        </ListSubheader>
+                    }
+                >
+                    <DrawerLink primary='Perfil' routeName='profile.edit' />
+
+                    <Link href={route('logout')} method='post' as='button' className='w-full'>
+                        <ListItem disablePadding>
+                            <ListItemButton >
+                                <ListItemText primary='Finalizar Sesión' />
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
                 </List>
             </nav>
         </div>
