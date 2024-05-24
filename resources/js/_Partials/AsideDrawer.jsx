@@ -4,12 +4,11 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListSubheader from '@mui/material/ListSubheader';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 
 import TopBar from '@/_Partials/TopBar';
+
+import DrawerLink from '@/Components/DrawerLink';
 
 export default function AsideDrawer({user,drawerWidth})
 {
@@ -33,17 +32,17 @@ export default function AsideDrawer({user,drawerWidth})
 
     const darkTheme = createTheme({
         palette: {
-          mode: 'dark',
-          background: {
-              default: '#1c232f',
-              paper: '#1c232f',
-          },
-          text: {
-              primary: "#ced4dc",
-              secondary: "#ced4dc",
-          },
+            mode: 'dark',
+            background: {
+                default: '#1c232f',
+                paper: '#1c232f',
+            },
+            text: {
+                primary: "#ced4dc",
+                secondary: "#ced4dc",
+            },
         },
-      });
+    });
 
     const drawer = (
         <div>
@@ -54,25 +53,14 @@ export default function AsideDrawer({user,drawerWidth})
             <nav>                            
                 <List 
                     subheader={
-                        <ListSubheader component="div" id="role-and-permission">
+                        <ListSubheader component="div" id="navigation">
                             <span className='ml-2 text-[#7267ef] capitalize'>Navegacion</span>
                         </ListSubheader>
                     }
                 >
-                    <ListItem disablePadding>
-                        <ListItemButton component="a" href={route('dashboard')} selected={route().current('dashboard')}>
-                            <ListItemText primary="Dashboard"/>
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemButton component="a" href={route('hola')} selected={route().current('hola')}>
-                            <ListItemText primary="Hola"/>
-                        </ListItemButton>
-                    </ListItem>
+                    <DrawerLink primary='Dashboard' routeName='dashboard' />
+                    <DrawerLink primary='Hola'      routeName='hola' />
                 </List>
-
-
-
 
                 <List
                     subheader={
@@ -81,16 +69,8 @@ export default function AsideDrawer({user,drawerWidth})
                         </ListSubheader>
                     }
                 >
-                    <ListItem disablePadding>
-                        <ListItemButton component="a" href={route('dashboard')} selected={route().current('dashboard')}>
-                            <ListItemText primary="Dashboard"/>
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem disablePadding>
-                        <ListItemButton component="a" href={route('hola')} selected={route().current('hola')}>
-                            <ListItemText primary="Hola"/>
-                        </ListItemButton>
-                    </ListItem>
+                    <DrawerLink primary='Dashboard' routeName='dashboard' />
+                    <DrawerLink primary='Hola'      routeName='hola' />
                 </List>
             </nav>
         </div>
