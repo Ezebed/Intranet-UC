@@ -72,7 +72,7 @@ export default function AsideDrawer({user,drawerWidth})
                         </ListSubheader>
                     }
                 >
-                    <DrawerLink primary='Dashboard' routeName='dashboard' />
+                    <DrawerLink primary='Roles' routeName='admin.role.index' />
                     <DrawerLink primary='Hola'      routeName='hola' />
                 </List>
                 

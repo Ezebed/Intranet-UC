@@ -5,6 +5,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\RoleController;
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -26,6 +28,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth','verified'])->group(function(){
     Route::get('/hola',function(){ return Inertia::render('holaMundo'); })->name('hola');
+
+    Route::resource('/admin/role', RoleController::class )->names('admin.role');
 });
 
 require __DIR__.'/auth.php';
