@@ -60,7 +60,7 @@ class RoleController extends Controller
      */
     public function show(string $id)
     {
-        //
+        dd($id);
     }
 
     /**
@@ -109,6 +109,16 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        dd($role);
+        $role->delete();
+
+        $roles = Role::all();
+
+        return Inertia::render('Admin/Role/index',[
+            'roles' => $roles,
+            'alert' => [
+                'message' => 'El rol se borro de manera exitosa.',
+                'severity' => 'error'
+            ]
+        ]);
     }
 }

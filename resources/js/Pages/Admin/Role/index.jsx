@@ -60,7 +60,7 @@ export default function RoleIndex({auth,roles,alert=null})
                                                     Editar
                                                 </Button>
                                             </Link>
-                                            <Link href={route('admin.role.destroy',role)}>
+                                            <Link href={route('admin.role.destroy',role)} method="delete" as="button" >
                                                 <Button variant="outlined" startIcon={<DeleteIcon />} size="small" color="error">
                                                     Eliminar
                                                 </Button>
