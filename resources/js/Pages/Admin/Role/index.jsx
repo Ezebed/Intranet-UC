@@ -2,6 +2,8 @@ import AdminLayout from "@/Layouts/AdminLayout";
 import { Head } from '@inertiajs/react';
 import React from 'react';
 
+import { Link } from '@inertiajs/react';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,15 +14,16 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { Link } from '@inertiajs/react';
+import RoleAlert from "@/Components/Role/RoleAlert";
 
-export default function RoleIndex({auth,roles})
+export default function RoleIndex({auth,roles,alert=null})
 {
     const paperElevation = 5;
 
     return(
         <AdminLayout user={auth.user} >
             <Head title="Roles" />
+            {alert && <RoleAlert message={alert.message} severity={alert.severity} />}
             <div className="m-4 p-4 bg-white">
                 <h2 className="text-xl mb-4 text-gray-500">Lista de Roles</h2>
 

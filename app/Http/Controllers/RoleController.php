@@ -75,7 +75,15 @@ class RoleController extends Controller
 
         $role->permissions()->sync($request->permissions);
 
-        return to_route('admin.role.index');
+        $roles = Role::all();
+
+        return Inertia::render('Admin/Role/index',[
+            'roles' => $roles,
+            'alert' => [
+                'message' => 'El rol se actualizó de manera exitosa!!!.',
+                'severity' => 'success'
+            ]
+        ]);
     }
 
     /**
