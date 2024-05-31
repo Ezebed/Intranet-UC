@@ -10,14 +10,14 @@ import Tooltip from '@mui/material/Tooltip';
 
 import Form from "@/Components/Role/Form";
 
-export default function RoleEdit({auth,role,rolePermissions,permissions})
+export default function RoleEdit({auth,permissions})
 {
     return( 
         <AdminLayout user={auth.user}>
             <Head title="Editar Rol" />
             <div className="m-4 p-4 bg-white">
                 <div className="flex justify-between items-center">
-                    <h2 className="text-xl text-gray-500">Editar Rol</h2>
+                    <h2 className="text-xl text-gray-500">Crear Rol</h2>
                     <Link href={route('admin.role.index')}>
                         <Tooltip title="Regresar">
                             <IconButton size="large">
@@ -27,7 +27,7 @@ export default function RoleEdit({auth,role,rolePermissions,permissions})
                     </Link>
                 </div>
                 
-                <Form role={role} rolePermissions={rolePermissions} permissions={permissions} method="patch" routeName="admin.role.update" />
+                <Form permissions={permissions} method='post' routeName="admin.role.store" />
             </div>
         </AdminLayout>
     )

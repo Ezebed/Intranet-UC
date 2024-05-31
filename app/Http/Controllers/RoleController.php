@@ -26,7 +26,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $permissions = Permission::all();
+
+        return Inertia::render('Admin/Role/create',[ 'permissions' => $permissions ]);
     }
 
     /**
@@ -34,7 +36,23 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $newRole = Role::create($request->all());
+
+        $newRole->permissions()->sync($request->permissions);
+
+        $roles = Role::all();
+
+        return Inertia::render('Admin/Role/index',[
+            'roles' => $roles,
+            'alert' => [
+                'message' => 'Rol creado exitosamente!!!.',
+                'severity' => 'success'
+            ]
+        ]);
     }
 
     /**

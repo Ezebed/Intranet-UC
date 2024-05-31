@@ -11,11 +11,11 @@ import FormLabel from '@mui/material/FormLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 
-export default function Form({role,rolePermissions,permissions,routeName})
+export default function Form({role,rolePermissions,permissions,routeName,method})
 {
-    const { data, setData, patch, processing, errors } = useForm({
-        name: role.name,
-        permissions: rolePermissions.map( permission => permission.id+''),
+    const { data, setData, patch, post, processing, errors } = useForm({
+        name: role ? role.name : '',
+        permissions: role ? rolePermissions.map( permission => permission.id+'') : [],
         remember: false,
     })
     
@@ -43,7 +43,13 @@ export default function Form({role,rolePermissions,permissions,routeName})
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        patch(route(routeName,role));
+
+        if(method === 'post'){
+            post(route(routeName));
+        }else{
+            patch(route(routeName,role));
+        }
+
     };
 
     return(
@@ -83,7 +89,7 @@ export default function Form({role,rolePermissions,permissions,routeName})
                 ))}
             </FormGroup>
             <Button variant="contained" type="submit" disabled={processing} sx={{mt:2}} >
-                Actualizar
+                { role ? 'Actualizar': 'Crear'}
             </Button>
         </Box>
     )

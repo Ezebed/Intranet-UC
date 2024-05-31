@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
 import RoleAlert from "@/Components/Role/RoleAlert";
 
@@ -25,9 +26,16 @@ export default function RoleIndex({auth,roles,alert=null})
             <Head title="Roles" />
             {alert && <RoleAlert message={alert.message} severity={alert.severity} />}
             <div className="m-4 p-4 bg-white">
-                <h2 className="text-xl mb-4 text-gray-500">Lista de Roles</h2>
+                <div className="flex justify-between items-center">
+                    <h2 className="text-xl text-gray-500">Lista de Roles</h2>
+                    <Link href={route('admin.role.create')}>
+                        <Button variant="contained" startIcon={ <AddRoundedIcon/> } >
+                            Crear Rol
+                        </Button>
+                    </Link>
+                </div>
 
-                <TableContainer component={Paper} elevation={paperElevation}>
+                <TableContainer component={Paper} elevation={paperElevation} sx={{ mt:2 }} >
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                         <TableRow>
