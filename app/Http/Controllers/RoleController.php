@@ -50,15 +50,32 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return Inertia::render('Admin/Role/edit',['role' => $role]);
+        $permissions = Permission::all();
+
+        $rolePermissions = $role->permissions;
+
+        return Inertia::render('Admin/Role/edit',[
+            'role' => $role, 
+            'rolePermissions' => $rolePermissions, 
+            'permissions' => $permissions
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $role->name = $request->name;
+        $role->save();
+
+        $role->permissions()->sync($request->permissions);
+
+        return to_route('admin.role.index');
     }
 
     /**
