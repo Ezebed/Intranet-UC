@@ -1,8 +1,6 @@
 import AdminLayout from "@/Layouts/AdminLayout";
-import { Head } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import React from 'react';
-
-import { Link } from '@inertiajs/react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -15,16 +13,16 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
-import RoleAlert from "@/Components/Role/RoleAlert";
+import Alert from "@/Components/Alert";
 
-export default function RoleIndex({auth,roles,alert=null})
+export default function RoleIndex({auth,roles,alert})
 {
     const paperElevation = 5;
 
     return(
         <AdminLayout user={auth.user} >
             <Head title="Roles" />
-            {alert && <RoleAlert message={alert.message} severity={alert.severity} />}
+            {alert && <Alert key={alert.message} message={alert.message} severity={alert.severity} />}
             <div className="m-4 p-4 bg-white">
                 <div className="flex justify-between items-center">
                     <h2 className="text-xl text-gray-500">Lista de Roles</h2>
@@ -61,7 +59,13 @@ export default function RoleIndex({auth,roles,alert=null})
                                                 </Button>
                                             </Link>
                                             <Link href={route('admin.role.destroy',role)} method="delete" as="button" >
-                                                <Button variant="outlined" startIcon={<DeleteIcon />} size="small" color="error">
+                                                <Button 
+                                                    variant="outlined" 
+                                                    startIcon={<DeleteIcon />} 
+                                                    size="small" 
+                                                    color="error"
+                                                    component="div"
+                                                >
                                                     Eliminar
                                                 </Button>
                                             </Link>

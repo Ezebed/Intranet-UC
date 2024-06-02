@@ -3,7 +3,7 @@ import React from "react";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
-export default function RoleAlert({message,severity})
+export default function AutoHideAlert({message,severity})
 {
     const [open, setOpen] = React.useState(true);
   
@@ -18,7 +18,7 @@ export default function RoleAlert({message,severity})
     return(
         <Snackbar
             open={open}
-            anchorOrigin={{ vertical:'top', horizontal:'right' }}
+            anchorOrigin={{ vertical:'bottom', horizontal:'right' }}
             autoHideDuration={5000}
             onClose={handleClose}
         >

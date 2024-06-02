@@ -18,7 +18,7 @@ class RoleController extends Controller
     {
         $roles = Role::all();
 
-        return Inertia::render('Admin/Role/index', ['roles' => $roles]);
+        return Inertia::render('Admin/Role/index', ['roles' => Role::all()]);
     }
 
     /**
@@ -44,15 +44,7 @@ class RoleController extends Controller
 
         $newRole->permissions()->sync($request->permissions);
 
-        $roles = Role::all();
-
-        return Inertia::render('Admin/Role/index',[
-            'roles' => $roles,
-            'alert' => [
-                'message' => 'Rol creado exitosamente!!!.',
-                'severity' => 'success'
-            ]
-        ]);
+        return to_route('admin.role.index');
     }
 
     /**
@@ -93,14 +85,9 @@ class RoleController extends Controller
 
         $role->permissions()->sync($request->permissions);
 
-        $roles = Role::all();
-
-        return Inertia::render('Admin/Role/index',[
-            'roles' => $roles,
-            'alert' => [
-                'message' => 'El rol se actualizó de manera exitosa!!!.',
-                'severity' => 'success'
-            ]
+        return to_route('admin.role.index')->with('alert',[
+            'message' => 'Rol actualizado correctamente!!!.',
+            'severity' => 'success'
         ]);
     }
 
@@ -109,16 +96,12 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        $name = $role->name;
         $role->delete();
 
-        $roles = Role::all();
-
-        return Inertia::render('Admin/Role/index',[
-            'roles' => $roles,
-            'alert' => [
-                'message' => 'El rol se borro de manera exitosa.',
-                'severity' => 'error'
-            ]
+        return to_route('admin.role.index')->with('alert',[
+            'message' => 'Rol '.$name.' eliminado correctamente!!!.',
+            'severity' => 'error'
         ]);
     }
 }
