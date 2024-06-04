@@ -10,7 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 import Form from "@/Components/Permission/Form";
 
-export default function PermissionEdit({auth})
+export default function PermissionEdit({auth,permission})
 {
     return( 
         <AdminLayout user={auth.user}>
@@ -27,7 +27,7 @@ export default function PermissionEdit({auth})
                     </Link>
                 </div>
                 
-                <Form method="post" routeName="admin.permission.store"/>
+                <Form permission={permission} method="patch" routeName="admin.permission.update"/>
             </div>
         </AdminLayout>
     )

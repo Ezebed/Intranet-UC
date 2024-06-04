@@ -55,27 +55,34 @@ class PermissionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Permission $permission)
     {
-        //
+        return Inertia::render('Admin/Permission/edit',[
+            'permission' => $permission
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Permission $permission)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $permission->name = $request->name;
+        $permission->save();
+
+        return to_route('admin.permission.index')->with('flash',[
+            'alert' => [
+                'id' => $permission->id,
+                'message' => 'Permiso actualizado correctamente!!!.',
+                'severity' => 'success'
+            ]
+        ]);
     }
 
     /**
