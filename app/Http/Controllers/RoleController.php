@@ -17,8 +17,6 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
-
         return Inertia::render('Admin/Role/index', ['roles' => Role::all()]);
     }
 

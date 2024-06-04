@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -29,7 +30,13 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth','verified'])->group(function(){
     Route::get('/hola',function(){ return Inertia::render('holaMundo'); })->name('hola');
 
-    Route::resource('/admin/role', RoleController::class )->only(['index','create','store','edit','update','destroy'])->names('admin.role');
+    Route::resource('/admin/role', RoleController::class )
+            ->only(['index','create','store','edit','update','destroy'])
+            ->names('admin.role');
+
+    Route::resource('/admin/permission', PermissionController::class )
+            ->only(['index','create','store','edit','update','destroy'])
+            ->names('admin.permission');
 });
 
 require __DIR__.'/auth.php';
