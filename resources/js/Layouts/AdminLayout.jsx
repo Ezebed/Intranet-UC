@@ -12,7 +12,7 @@ export default function AdminLayout({user, children})
     const drawerWidth = 280;
 
     return(
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex' }} >
             <CssBaseline />
 
             <AsideDrawer user={user} drawerWidth={drawerWidth}/>
@@ -20,11 +20,10 @@ export default function AdminLayout({user, children})
             <Box
                 component="main"
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+                className='min-h-screen bg-gray-100'
             >
                 <Toolbar />
 
-                {children}
-                {children}
                 {children}
             </Box>
         </Box>

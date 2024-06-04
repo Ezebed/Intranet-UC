@@ -65,6 +65,7 @@ export default function AsideDrawer({user,drawerWidth})
                     <DrawerLink primary='Hola'      routeName='hola' />
                 </List>
 
+                {/* Admin's Link's */}
                 <List
                     subheader={
                         <ListSubheader component="div" id="role-and-permission">
@@ -72,8 +73,8 @@ export default function AsideDrawer({user,drawerWidth})
                         </ListSubheader>
                     }
                 >
-                    <DrawerLink primary='Dashboard' routeName='dashboard' />
-                    <DrawerLink primary='Hola'      routeName='hola' />
+                    <DrawerLink primary='Roles'     routeName='admin.role.index' />
+                    <DrawerLink primary='Permisos'  routeName='admin.permission.index' />
                 </List>
                 
                 {/* User's Links */}
