@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth','verified'])->group(function(){
     Route::get('/hola',function(){ return Inertia::render('holaMundo'); })->name('hola');
 
-    Route::resource('/admin/role', RoleController::class )->names('admin.role');
+    Route::resource('/admin/role', RoleController::class )->only(['index','create','store','edit','update','destroy'])->names('admin.role');
 });
 
 require __DIR__.'/auth.php';

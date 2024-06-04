@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 use Inertia\Inertia;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -40,19 +41,27 @@ class RoleController extends Controller
             'name' => 'required',
         ]);
 
-        $newRole = Role::create($request->all());
+        // $newRole = Role::create($request->all());
 
-        $newRole->permissions()->sync($request->permissions);
+        $roleId = DB::table('roles')->insertGetId([
+            'name' => $request->name,
+            'guard_name' => 'web',
+            'created_at' => date("Y-m-d H:i:s")
+        ]);
 
-        return to_route('admin.role.index');
-    }
+        $newRole = Role::where('id',$roleId)->get();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        dd($id);
+        // dd($newRole);
+
+        $newRole[0]->permissions()->sync($request->permissions);
+
+        return to_route('admin.role.index')->with('flash',[
+            'alert' => [
+                'id' => $newRole[0]->id,
+                'message' => 'Rol creado correctamente!!!.',
+                'severity' => 'success'
+            ]
+        ]);
     }
 
     /**
@@ -85,9 +94,12 @@ class RoleController extends Controller
 
         $role->permissions()->sync($request->permissions);
 
-        return to_route('admin.role.index')->with('alert',[
-            'message' => 'Rol actualizado correctamente!!!.',
-            'severity' => 'success'
+        return to_route('admin.role.index')->with('flash', [
+            'alert' => [
+                'id' => $role->id,
+                'message' => 'Rol actualizado correctamente!!!.',
+                'severity' => 'success'
+            ]
         ]);
     }
 
@@ -96,12 +108,15 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        $name = $role->name;
+        $id = $role->id;
         $role->delete();
 
-        return to_route('admin.role.index')->with('alert',[
-            'message' => 'Rol '.$name.' eliminado correctamente!!!.',
-            'severity' => 'error'
+        return to_route('admin.role.index')->with('flash', [
+            'alert' => [
+                'id' => $id,
+                'message' => 'Rol eliminado correctamente!!!.',
+                'severity' => 'error'
+            ]
         ]);
     }
 }
