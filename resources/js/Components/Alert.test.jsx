@@ -1,5 +1,6 @@
 import React from "react"
-import {render, screen, fireEvent} from "@testing-library/react"
+import {render, screen, waitFor} from "@testing-library/react"
+import '@testing-library/jest-dom';
 
 import Alert from "./Alert"
 
@@ -11,7 +12,7 @@ describe("<Alert />", () => {
 
         const element = screen.getByText(/alerta que desaparece/i)
 
-        expect(element).toBeInTheDocument();
+        expect(element).toBeInTheDocument()
     })
 
     test("render success color", () => {
@@ -19,6 +20,14 @@ describe("<Alert />", () => {
 
         const dialog = screen.getByRole("alert")
 
-        expect(dialog).toHaveClass("MuiAlert-colorSucces")
+        expect(dialog.className).toMatch(/MuiAlert-colorSucces/)
+    })
+
+    test("render error color", () => {
+        render(<Alert message="Esta es una alerta que desaparece a los pocos segundos" severity="error"/>)
+
+        const dialog = screen.getByRole("alert")
+
+        expect(dialog.className).toMatch(/MuiAlert-colorError/)
     })
 })
