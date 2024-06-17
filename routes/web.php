@@ -7,6 +7,7 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -37,6 +38,10 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::resource('/admin/permission', PermissionController::class )
             ->only(['index','create','store','edit','update','destroy'])
             ->names('admin.permission');
+
+    Route::resource('/admin/user', UserController::class )
+            ->only(['index','create','store','edit','update','destroy'])
+            ->names('admin.user');
 });
 
 require __DIR__.'/auth.php';

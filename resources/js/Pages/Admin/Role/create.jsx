@@ -10,7 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 import Form from "@/Components/Role/Form";
 
-export default function RoleEdit({auth,permissions})
+export default function RoleCreate({auth,permissions})
 {
     return( 
         <AdminLayout user={auth.user}>

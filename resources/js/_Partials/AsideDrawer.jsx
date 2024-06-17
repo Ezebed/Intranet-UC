@@ -76,8 +76,19 @@ export default function AsideDrawer({user,drawerWidth})
                     <DrawerLink primary='Roles'     routeName='admin.role.index' />
                     <DrawerLink primary='Permisos'  routeName='admin.permission.index' />
                 </List>
+
+                {/* User's Link's */}
+                <List
+                    subheader={
+                        <ListSubheader component="div" id="role-and-permission">
+                            <span className='ml-2 text-[#7267ef] capitalize'>Usuarios</span>
+                        </ListSubheader>
+                    }
+                >
+                    <DrawerLink primary='Usuarios'     routeName='admin.user.index' />
+                </List>
                 
-                {/* User's Links */}
+                {/* Profile's Links */}
                 <List
                     sx={{ display:{ xs: 'block', sm: 'none' } }}
                     subheader={

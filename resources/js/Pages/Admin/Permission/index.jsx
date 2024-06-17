@@ -42,7 +42,7 @@ export default function PermissionIndex({auth,permissions,flash})
                 </div>
 
                 <TableContainer component={Paper} elevation={paperElevation} sx={{ mt:2 }} >
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <Table sx={{ minWidth: { xs:300 ,sm:650} }} aria-label="simple table">
                         <TableHead>
                         <TableRow>
                             <TableCell fontWeight="700" >ID</TableCell>
@@ -60,7 +60,7 @@ export default function PermissionIndex({auth,permissions,flash})
                                     <TableCell component="th" scope="row">{permission.id}</TableCell>
                                     <TableCell align="left">{permission.name}</TableCell>
                                     <TableCell align="right">
-                                        <div className="space-x-2">
+                                        <div className="space-y-2 md:space-y-0 md:space-x-2">
                                             <Link href={route('admin.permission.edit',permission)}>
                                                 <Button variant="contained" size="small">
                                                     Editar
