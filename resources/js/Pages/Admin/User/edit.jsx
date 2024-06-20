@@ -27,7 +27,13 @@ export default function UserEdit({auth,roles,user,userRoles})
                     </Link>
                 </div>
                 
-                <Form user={user} userRoles={userRoles} roles={roles} method="patch" routeName="admin.user.update" />
+                <Form 
+                    user={user} 
+                    userRoles={userRoles} 
+                    roles={roles} 
+                    method="patch" 
+                    routeName="admin.user.update"
+                />
             </div>
         </AdminLayout>
     )

@@ -116,7 +116,7 @@ function DeleteDialog({user})
                     <DialogContentText id="alert-dialog-description">
                         Estas a punto de eliminar un usuario, esta accion es irreversible.
                         <br></br>
-                        ¿Estas seguro de eliminar el rol?.
+                        ¿Estas seguro de eliminar el usuario?.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

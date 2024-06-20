@@ -19,7 +19,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 
 
-export default function Form({user,userRoles,roles,routeName,method})
+export default function Form({user,userRoles,roles,routeName,method,passwordRequired=false})
 {
     const [showPassword, setShowPassword] = useState(false)
 
@@ -102,9 +102,9 @@ export default function Form({user,userRoles,roles,routeName,method})
                     fullWidth
                 />
                 <FormControl variant="outlined">
-                    <InputLabel htmlFor="password">Contraseña *</InputLabel>
+                    <InputLabel htmlFor="password">Contraseña</InputLabel>
                     <OutlinedInput
-                        required
+                        required={passwordRequired}
                         variant="outlined"
                         type={showPassword ? 'text' : 'password'}
                         id="password"
@@ -129,7 +129,7 @@ export default function Form({user,userRoles,roles,routeName,method})
                 </FormControl>
             </FormGroup>
             <FormGroup sx={{ mt:2 }} >
-                <FormLabel component="legend" >Permisos</FormLabel>
+                <FormLabel component="legend" >Roles</FormLabel>
                 {roles.map(role => (
                     <FormControlLabel
                         key={role.id} 

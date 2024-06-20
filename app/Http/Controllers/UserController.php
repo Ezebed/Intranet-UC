@@ -37,7 +37,7 @@ class UserController extends Controller
     {
         $request->validate([
             "name"  => "required",
-            "email" => "required",
+            "email" => "required|email|unique:Users,email",
             "password" => "required"
         ]);
 
@@ -69,16 +69,48 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            "name"  => "required",
+            "email" => "required|email"
+        ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if( $request->password != '' ){
+            $user->password = $request->password;
+        }
+
+        $user->save();
+
+        $user->assignRole($request->roles);
+
+        return to_route('admin.user.index')->with('flash',[
+            'alert' => [
+                'id' => $user->id,
+                'message' => 'usuario actualizado correectamente!!!.',
+                'severity' => 'success'
+            ]
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $id = $user->id;
+
+        $user->delete();
+
+        return to_route('admin.user.index')->with('flash',[
+            'alert' => [
+                'id' => $id,
+                'message' => 'usuario eliminado correectamente!!!.',
+                'severity' => 'error'
+            ]
+        ]);
     }
 }

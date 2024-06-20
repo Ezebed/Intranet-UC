@@ -27,7 +27,12 @@ export default function UserCreate({auth,roles})
                     </Link>
                 </div>
                 
-                <Form roles={roles} method="post" routeName="admin.user.store" />
+                <Form 
+                    roles={roles} 
+                    passwordRequired={true}
+                    method="post" 
+                    routeName="admin.user.store" 
+                />
             </div>
         </AdminLayout>
     )
