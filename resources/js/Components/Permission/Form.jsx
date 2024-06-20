@@ -9,7 +9,7 @@ import { useForm } from "@inertiajs/react";
 export default function Form({permission,method,routeName})
 {
     const { data, setData, patch, post, processing, errors } = useForm({
-        name: permission ? permission.name : '',
+        name: permission?.name ?? '',
         remember: false,
     })
 

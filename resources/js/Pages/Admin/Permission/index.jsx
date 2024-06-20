@@ -13,6 +13,12 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 import Alert from "@/Components/Alert";
 
 export default function PermissionIndex({auth,permissions,flash})
@@ -36,7 +42,7 @@ export default function PermissionIndex({auth,permissions,flash})
                 </div>
 
                 <TableContainer component={Paper} elevation={paperElevation} sx={{ mt:2 }} >
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <Table sx={{ minWidth: { xs:300 ,sm:650} }} aria-label="simple table">
                         <TableHead>
                         <TableRow>
                             <TableCell fontWeight="700" >ID</TableCell>
@@ -54,23 +60,13 @@ export default function PermissionIndex({auth,permissions,flash})
                                     <TableCell component="th" scope="row">{permission.id}</TableCell>
                                     <TableCell align="left">{permission.name}</TableCell>
                                     <TableCell align="right">
-                                        <div className="space-x-2">
+                                        <div className="space-y-2 md:space-y-0 md:space-x-2">
                                             <Link href={route('admin.permission.edit',permission)}>
                                                 <Button variant="contained" size="small">
                                                     Editar
                                                 </Button>
                                             </Link>
-                                            <Link href={route('admin.permission.destroy',permission)} method="delete" as="button" >
-                                                <Button 
-                                                    variant="outlined" 
-                                                    startIcon={<DeleteIcon />} 
-                                                    size="small" 
-                                                    color="error"
-                                                    component="div"
-                                                >
-                                                    Eliminar
-                                                </Button>
-                                            </Link>
+                                            <DeleteDialog permission={permission} />
                                         </div>
                                     </TableCell>
                                 </TableRow>
@@ -80,5 +76,59 @@ export default function PermissionIndex({auth,permissions,flash})
                     </TableContainer>
             </div>
         </AdminLayout>
+    )
+}
+
+
+function DeleteDialog({permission})
+{
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+  
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    return(
+        <>
+            <Button 
+                variant="outlined" 
+                startIcon={<DeleteIcon />} 
+                size="small" 
+                color="error"
+                onClick={handleClickOpen}
+            >
+                Eliminar
+            </Button>
+
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"¿Eliminar el Permiso "+permission.name+"?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Estas a punto de eliminar un permiso, esta accion es irreversible.
+                        <br></br>
+                        ¿Estas seguro de eliminar el permiso?.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button variant="contained" onClick={handleClose} autofocus>Cancelar</Button>
+                    <Link href={route('admin.permission.destroy',permission)} method="delete" as="button" >
+                        <Button component="div" variant="text" color="error" onClick={handleClose}>
+                            Eliminar
+                        </Button>
+                    </Link>
+                </DialogActions>
+            </Dialog>
+        </>
     )
 }

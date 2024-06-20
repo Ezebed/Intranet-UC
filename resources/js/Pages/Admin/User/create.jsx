@@ -8,17 +8,17 @@ import ArrowCircleLeftRoundedIcon from '@mui/icons-material/ArrowCircleLeftRound
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-import Form from "@/Components/Permission/Form";
+import Form from '@/Components/user/Form'
 
-export default function PermissionCreate({auth})
+export default function UserCreate({auth,roles})
 {
     return( 
         <AdminLayout user={auth.user}>
-            <Head title="Editar Rol" />
+            <Head title="Crear Usuario" />
             <div className="m-4 p-4 bg-white">
                 <div className="flex justify-between items-center">
-                    <h2 className="text-xl text-gray-500">Crear Permiso</h2>
-                    <Link href={route('admin.permission.index')}>
+                    <h2 className="text-xl text-gray-500">Crear Usuario</h2>
+                    <Link href={route('admin.user.index')}>
                         <Tooltip title="Regresar">
                             <IconButton size="large">
                                 <ArrowCircleLeftRoundedIcon fontSize="inherit" />
@@ -27,7 +27,12 @@ export default function PermissionCreate({auth})
                     </Link>
                 </div>
                 
-                <Form method="post" routeName="admin.permission.store"/>
+                <Form 
+                    roles={roles} 
+                    passwordRequired={true}
+                    method="post" 
+                    routeName="admin.user.store" 
+                />
             </div>
         </AdminLayout>
     )

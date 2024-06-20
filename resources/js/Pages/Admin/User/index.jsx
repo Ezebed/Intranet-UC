@@ -21,7 +21,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import Alert from "@/Components/Alert";
 
-export default function RoleIndex({auth,roles,flash})
+export default function UserIndex({auth,users,flash})
 {
     const alert = flash?.alert;
     
@@ -29,14 +29,14 @@ export default function RoleIndex({auth,roles,flash})
 
     return(
         <AdminLayout user={auth.user} >
-            <Head title="Roles" />
+            <Head title="Usuarios" />
             {alert && <Alert key={alert.id} message={alert.message} severity={alert.severity} />}
             <div className="m-4 p-4 bg-white">
                 <div className="flex justify-between items-center">
-                    <h2 className="text-xl text-gray-500">Lista de Roles</h2>
-                    <Link href={route('admin.role.create')}>
+                    <h2 className="text-xl text-gray-500">Lista de Usuarios</h2>
+                    <Link href={route('admin.user.create')}>
                         <Button variant="contained" startIcon={ <AddRoundedIcon/> } >
-                            Crear Rol
+                            Crear Usuario
                         </Button>
                     </Link>
                 </div>
@@ -52,21 +52,21 @@ export default function RoleIndex({auth,roles,flash})
                         </TableRow>
                         </TableHead>
                         <TableBody>
-                            {roles.map((role) => (
+                            {users.map((user) => (
                                 <TableRow
-                                key={role.id}
+                                key={user.id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                    <TableCell component="th" scope="row">{role.id}</TableCell>
-                                    <TableCell align="left">{role.name}</TableCell>
+                                    <TableCell component="th" scope="row">{user.id}</TableCell>
+                                    <TableCell align="left">{user.name}</TableCell>
                                     <TableCell align="right">
                                         <div className="space-y-2 md:space-y-0 md:space-x-2">
-                                            <Link href={route('admin.role.edit',role)}>
+                                            <Link href={route('admin.user.edit',user)}>
                                                 <Button variant="contained" size="small">
                                                     Editar
                                                 </Button>
                                             </Link>
-                                            <DeleteDialog role={role} />
+                                            <DeleteDialog user={user} />
                                         </div>
                                     </TableCell>
                                 </TableRow>
@@ -79,7 +79,7 @@ export default function RoleIndex({auth,roles,flash})
     )
 }
 
-function DeleteDialog({role})
+function DeleteDialog({user})
 {
     const [open, setOpen] = React.useState(false);
 
@@ -110,18 +110,18 @@ function DeleteDialog({role})
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"¿Eliminar el Rol "+role.name+"?"}
+                    {"¿Eliminar el Rol "+user.name+"?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Estas a punto de eliminar un rol, esta accion es irreversible.
+                        Estas a punto de eliminar un usuario, esta accion es irreversible.
                         <br></br>
-                        ¿Estas seguro de eliminar el rol?.
+                        ¿Estas seguro de eliminar el usuario?.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button variant="contained" onClick={handleClose} autofocus>Cancelar</Button>
-                    <Link href={route('admin.role.destroy',role)} method="delete" as="button" >
+                    <Link href={route('admin.user.destroy',user)} method="delete" as="button" >
                         <Button component="div" variant="text" color="error" onClick={handleClose}>
                             Eliminar
                         </Button>

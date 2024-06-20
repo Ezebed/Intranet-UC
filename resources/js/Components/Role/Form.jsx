@@ -14,8 +14,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 export default function Form({role,rolePermissions,permissions,routeName,method})
 {
     const { data, setData, patch, post, processing, errors } = useForm({
-        name: role ? role.name : '',
-        permissions: role ? rolePermissions.map( permission => permission.id+'') : [],
+        name: role?.name ?? '',
+        permissions: rolePermissions?.map( permission => permission.id+'') ?? [],
         remember: false,
     })
     
