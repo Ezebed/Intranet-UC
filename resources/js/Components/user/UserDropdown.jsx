@@ -3,6 +3,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import { Link } from '@inertiajs/react';
 
@@ -41,12 +45,22 @@ export default function UserDropdown({user})
             >
                 <Link href={route('profile.edit')}>
                     <MenuItem onClick={handleClose}>
-                        Perfil
+                        <ListItemIcon>
+                            <AccountCircleIcon />
+                        </ListItemIcon>
+                        <ListItemText>
+                            Perfil
+                        </ListItemText>
                     </MenuItem>
                 </Link>
                 <Link href={route('logout')} method="post" as="button" >
                     <MenuItem onClick={handleClose}>
-                        Finalizar Sesión
+                    <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        <ListItemText>
+                            Finalizar Sesión
+                        </ListItemText>
                     </MenuItem>
                 </Link>
             </Menu>
