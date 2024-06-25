@@ -61,7 +61,7 @@ export default function UserIndex({auth,users,flash})
                                     <TableCell component="th" scope="row">{user.id}</TableCell>
                                     <TableCell align="left">{user.name}</TableCell>
                                     <TableCell align="right">
-                                        <div className="space-y-2 md:space-y-0 md:space-x-2">
+                                        <div className="flex justify-end flex-col sm:flex-row gap-2">
                                             <Link href={route('admin.user.edit',user)}>
                                                 <Button variant="contained" size="small" startIcon={<EditIcon/>}>
                                                     Editar

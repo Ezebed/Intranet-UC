@@ -60,7 +60,7 @@ DB_PASSWORD=
 una vez rellenada las credenciales y configurado la AppServiceProvider (solo en caso de ser necesario) migramos la base de datos
 
 ```bash
-php artisan migrate
+php artisan migrate --seed
 ```
 
 iniciamos el servidor local

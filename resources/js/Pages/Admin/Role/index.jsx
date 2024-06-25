@@ -61,7 +61,7 @@ export default function RoleIndex({auth,roles,flash})
                                     <TableCell component="th" scope="row">{role.id}</TableCell>
                                     <TableCell align="left">{role.name}</TableCell>
                                     <TableCell align="right">
-                                        <div className="space-y-2 md:space-y-0 md:space-x-2">
+                                        <div className="flex justify-end flex-col sm:flex-row gap-2">
                                             <Link href={route('admin.role.edit',role)}>
                                                 <Button variant="contained" size="small" startIcon={<EditIcon/>}>
                                                     Editar
