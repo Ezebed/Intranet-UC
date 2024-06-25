@@ -10,6 +10,7 @@ export default function Form({permission,method,routeName})
 {
     const { data, setData, patch, post, processing, errors } = useForm({
         name: permission?.name ?? '',
+        description: permission?.description ?? '',
         remember: false,
     })
 
@@ -49,6 +50,19 @@ export default function Form({permission,method,routeName})
                 onChange={handleChange}
                 error={errors.name}
                 helperText={errors.name}
+                fullWidth
+            />
+            <TextField
+                sx={{ mt: 2 }} 
+                required
+                variant="outlined"
+                type="text"
+                id="description"
+                label="Descripcion"
+                defaultValue={data.description}
+                onChange={handleChange}
+                error={errors.description}
+                helperText={errors.description}
                 fullWidth
             />
 

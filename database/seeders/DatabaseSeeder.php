@@ -39,10 +39,22 @@ class DatabaseSeeder extends Seeder
 
         // Permissions
 
-        $isAdmin = Permission::create(['name' => 'isAdmin']);
-        $isDirector = Permission::create(['name' => 'isDirector']);
-        $isTeacher = Permission::create(['name' => 'isTeacher']);
-        $isAdministrative = Permission::create(['name' => 'isAdministrative']);
+        $isAdmin = Permission::create([
+            'name' => 'isAdmin',
+            'description' => 'Permiso de Administrador'
+        ]);
+        $isDirector = Permission::create([
+            'name' => 'isDirector',
+            'description' => 'Permiso de Director'
+        ]);
+        $isTeacher = Permission::create([
+            'name' => 'isTeacher',
+            'description' => 'Permiso de Profesor'
+        ]);
+        $isAdministrative = Permission::create([
+            'name' => 'isAdministrative',
+            'description' => 'Permiso Administrativo'
+        ]);
 
         // Assing permissions to roles
 

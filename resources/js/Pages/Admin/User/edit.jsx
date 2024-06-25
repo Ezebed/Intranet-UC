@@ -17,7 +17,7 @@ export default function UserEdit({auth,roles,user,userRoles})
             <Head title="Crear Usuario" />
             <div className="m-4 p-4 bg-white">
                 <div className="flex justify-between items-center">
-                    <h2 className="text-xl text-gray-500">Crear Usuario</h2>
+                    <h2 className="text-xl text-gray-500">Editar Usuario</h2>
                     <Link href={route('admin.user.index')}>
                         <Tooltip title="Regresar">
                             <IconButton size="large">
