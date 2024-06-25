@@ -36,7 +36,7 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required|max:64|unique:permissions,name'
         ]);
 
         $id = DB::table('permissions')->insertGetId([
@@ -70,7 +70,7 @@ class PermissionController extends Controller
     public function update(Request $request, Permission $permission)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required|max:64'
         ]);
 
         $permission->name = $request->name;
