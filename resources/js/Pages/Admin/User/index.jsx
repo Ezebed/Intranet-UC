@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
 import Dialog from '@mui/material/Dialog';
@@ -62,7 +63,7 @@ export default function UserIndex({auth,users,flash})
                                     <TableCell align="right">
                                         <div className="space-y-2 md:space-y-0 md:space-x-2">
                                             <Link href={route('admin.user.edit',user)}>
-                                                <Button variant="contained" size="small">
+                                                <Button variant="contained" size="small" startIcon={<EditIcon/>}>
                                                     Editar
                                                 </Button>
                                             </Link>

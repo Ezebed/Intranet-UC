@@ -84,7 +84,7 @@ export default function Form({role,rolePermissions,permissions,routeName,method}
                                 name={permission.name} 
                             />
                         }
-                        label={permission.name}
+                        label={permission.description}
                     />
                 ))}
             </FormGroup>

@@ -36,11 +36,13 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required|max:64|unique:permissions,name',
+            'description' => 'required'
         ]);
 
         $id = DB::table('permissions')->insertGetId([
             'name' => $request->name,
+            'description' => $request->description,
             'guard_name' => 'web',
             'created_at' => date("Y-m-d H:i:s")
         ]);
@@ -70,10 +72,12 @@ class PermissionController extends Controller
     public function update(Request $request, Permission $permission)
     {
         $request->validate([
-            'name' => 'required'
+            'name' => 'required|max:64',
+            'description' => 'required'
         ]);
 
         $permission->name = $request->name;
+        $permission->description = $request->description; 
         $permission->save();
 
         return to_route('admin.permission.index')->with('flash',[
