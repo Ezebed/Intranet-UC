@@ -48,7 +48,8 @@ export default function PermissionIndex({auth,permissions,flash})
                         <TableRow>
                             <TableCell fontWeight="700" >ID</TableCell>
                             <TableCell align="left">Nombre</TableCell>
-                            <TableCell align="left"></TableCell>
+                            <TableCell align="left">Descripcion</TableCell>
+                            <TableCell align="right"></TableCell>
                             
                         </TableRow>
                         </TableHead>
@@ -60,8 +61,9 @@ export default function PermissionIndex({auth,permissions,flash})
                                 >
                                     <TableCell component="th" scope="row">{permission.id}</TableCell>
                                     <TableCell align="left">{permission.name}</TableCell>
+                                    <TableCell align="left">{permission.description}</TableCell>
                                     <TableCell align="right">
-                                        <div className="space-y-2 md:space-y-0 md:space-x-2">
+                                        <div className="flex justify-end flex-col sm:flex-row gap-2">
                                             <Link href={route('admin.permission.edit',permission)}>
                                                 <Button variant="contained" size="small" startIcon={<EditIcon/>}>
                                                     Editar
