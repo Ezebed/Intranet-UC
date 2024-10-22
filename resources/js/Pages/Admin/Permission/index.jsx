@@ -1,27 +1,35 @@
 import AdminLayout from "@/Layouts/AdminLayout";
-import { Head, Link, usePage } from '@inertiajs/react';
-import React from 'react';
+import { Head, Link, usePage } from "@inertiajs/react";
+import React from "react";
 
-import Button from '@mui/material/Button';
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import Button from "@mui/material/Button";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
 import Alert from "@/Components/Alert";
 
-import Table from '@/Components/Permission/Table'
+import Table from "@/Components/Permission/Table";
 
-export default function PermissionIndex({auth,permissions,flash})
-{
+export default function PermissionIndex({ auth, permissions, flash }) {
     const alert = flash?.alert;
-    
-    return(
-        <AdminLayout user={auth.user} >
+
+    return (
+        <AdminLayout auth={auth}>
             <Head title="Permisos" />
-            {alert && <Alert key={alert.id} message={alert.message} severity={alert.severity} />}
+            {alert && (
+                <Alert
+                    key={alert.id}
+                    message={alert.message}
+                    severity={alert.severity}
+                />
+            )}
             <div className="m-4 p-4 bg-white">
                 <div className="flex justify-between items-center">
                     <h2 className="text-xl text-gray-500">Lista de Permisos</h2>
-                    <Link href={route('admin.permission.create')}>
-                        <Button variant="contained" startIcon={ <AddRoundedIcon/> } >
+                    <Link href={route("admin.permission.create")}>
+                        <Button
+                            variant="contained"
+                            startIcon={<AddRoundedIcon />}
+                        >
                             Crear Permiso
                         </Button>
                     </Link>
@@ -30,5 +38,5 @@ export default function PermissionIndex({auth,permissions,flash})
                 <Table permissions={permissions} />
             </div>
         </AdminLayout>
-    )
+    );
 }
