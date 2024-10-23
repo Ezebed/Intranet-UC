@@ -17,10 +17,6 @@ export default function AsideDrawer({ auth, drawerWidth }) {
     const [isClosing, setIsClosing] = React.useState(false);
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
-    // permission se utilizara para delimitar a que rutas puede acceder el ususario
-    // permission es un array de objetos, cada objeto es un permiso
-    const { user, permissions } = auth;
-
     const handleDrawerToggle = () => {
         if (!isClosing) {
             setMobileOpen(!mobileOpen);
@@ -35,6 +31,60 @@ export default function AsideDrawer({ auth, drawerWidth }) {
     const handleDrawerTransitionEnd = () => {
         setIsClosing(false);
     };
+
+    // permission se utilizara para delimitar a que rutas puede acceder el ususario
+    // permission es un array de objetos, cada objeto es un permiso
+    const { user, permissions } = auth;
+
+    // definicion de las rutas que se renderizaran en el drawer
+    const drawerRoutesList = [
+        {
+            hasPermission: permissions.some(
+                (permission) => permission.name === "isAdmin"
+            ),
+            subHeaderText: "Navegacion",
+            routes: [
+                {
+                    linkText: "Dashboard",
+                    routeName: "dashboard",
+                },
+                {
+                    linkText: "Hola",
+                    routeName: "hola",
+                },
+            ],
+        },
+        {
+            hasPermission: permissions.some(
+                (permission) => permission.name === "isAdmin"
+            ),
+            subHeaderText: "roles y permisos",
+            routes: [
+                {
+                    linkText: "Roles",
+                    routeName: "admin.role.index",
+                },
+                {
+                    linkText: "Permisos",
+                    routeName: "admin.permission.index",
+                },
+            ],
+        },
+        {
+            hasPermission: permissions.some(
+                (permission) => permission.name === "isAdmin"
+            ),
+            subHeaderText: "Usuarios",
+            routes: [
+                {
+                    linkText: "Usuarios",
+                    routeName: "admin.user.index",
+                },
+            ],
+        },
+    ];
+
+    // definicion de las rutas que se renderizaran en el drawer
 
     const darkTheme = createTheme({
         palette: {
@@ -57,51 +107,36 @@ export default function AsideDrawer({ auth, drawerWidth }) {
             </Box>
             <Divider />
             <nav>
-                <List
-                    subheader={
-                        <ListSubheader component="div" id="navigation">
-                            <span className="ml-2 text-[#7267ef] capitalize">
-                                Navegacion
-                            </span>
-                        </ListSubheader>
+                {/* rutas del drawer */}
+                {drawerRoutesList.map((drawerRoute, index) => {
+                    if (drawerRoute.hasPermission) {
+                        return (
+                            <List
+                                key={index}
+                                // texto cabecera de las rutas en el drawer
+                                subheader={
+                                    <ListSubheader
+                                        component="div"
+                                        id="role-and-permission"
+                                    >
+                                        <span className="ml-2 text-[#7267ef] capitalize">
+                                            {drawerRoute.subHeaderText}
+                                        </span>
+                                    </ListSubheader>
+                                }
+                            >
+                                {/* lista debotones de cada ruta */}
+                                {drawerRoute.routes.map((route, index) => (
+                                    <DrawerLink
+                                        key={index}
+                                        primary={route.linkText}
+                                        routeName={route.routeName}
+                                    />
+                                ))}
+                            </List>
+                        );
                     }
-                >
-                    <DrawerLink primary="Dashboard" routeName="dashboard" />
-                    <DrawerLink primary="Hola" routeName="hola" />
-                </List>
-
-                {/* Admin's Link's */}
-                <List
-                    subheader={
-                        <ListSubheader component="div" id="role-and-permission">
-                            <span className="ml-2 text-[#7267ef] capitalize">
-                                roles y permisos
-                            </span>
-                        </ListSubheader>
-                    }
-                >
-                    <DrawerLink primary="Roles" routeName="admin.role.index" />
-                    <DrawerLink
-                        primary="Permisos"
-                        routeName="admin.permission.index"
-                    />
-                </List>
-
-                {/* User's Link's */}
-                <List
-                    subheader={
-                        <ListSubheader component="div" id="role-and-permission">
-                            <span className="ml-2 text-[#7267ef] capitalize">
-                                Usuarios
-                            </span>
-                        </ListSubheader>
-                    }
-                >
-                    <DrawerLink
-                        primary="Usuarios"
-                        routeName="admin.user.index"
-                    />
-                </List>
+                })}
 
                 {/* Profile's Links */}
                 <List
