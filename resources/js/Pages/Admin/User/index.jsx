@@ -7,7 +7,7 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
 import Alert from "@/Components/Alert";
 
-import Table from "@/Components/user/Table";
+import Table from "@/Pages/Admin/User/componets/Table";
 
 export default function UserIndex({ auth, users, flash }) {
     const alert = flash?.alert;

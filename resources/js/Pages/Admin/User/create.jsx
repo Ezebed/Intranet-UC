@@ -8,7 +8,7 @@ import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRound
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 
-import Form from "@/Components/user/Form";
+import Form from "@/Pages/Admin/User/componets/Form";
 
 export default function UserCreate({ auth, roles }) {
     return (

@@ -7,7 +7,7 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
 import Alert from "@/Components/Alert";
 
-import Table from "@/Components/Permission/Table";
+import Table from "@/Pages/Admin/Permission/components/Table";
 
 export default function PermissionIndex({ auth, permissions, flash }) {
     const alert = flash?.alert;

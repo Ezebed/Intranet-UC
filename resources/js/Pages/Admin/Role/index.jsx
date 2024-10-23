@@ -7,7 +7,7 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
 import Alert from "@/Components/Alert";
 
-import Table from "@/Components/Role/Table";
+import Table from "@/Pages/Admin/Role/components/Table";
 
 export default function RoleIndex({ auth, roles, flash }) {
     const alert = flash?.alert;

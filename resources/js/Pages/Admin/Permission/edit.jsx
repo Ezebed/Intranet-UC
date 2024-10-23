@@ -8,7 +8,7 @@ import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRound
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 
-import Form from "@/Components/Permission/Form";
+import Form from "@/Pages/Admin/Permission/components/Form";
 
 export default function PermissionEdit({ auth, permission }) {
     return (
