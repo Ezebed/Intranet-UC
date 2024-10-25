@@ -22,21 +22,17 @@ export default function RoleIndex({ auth, roles, flash }) {
                     severity={alert.severity}
                 />
             )}
-            <div className="m-4 p-4 bg-white">
-                <div className="flex justify-between items-center">
-                    <h2 className="text-xl text-gray-500">Lista de Roles</h2>
-                    <Link href={route("admin.role.create")}>
-                        <Button
-                            variant="contained"
-                            startIcon={<AddRoundedIcon />}
-                        >
-                            Crear Rol
-                        </Button>
-                    </Link>
-                </div>
 
-                <Table roles={roles} />
+            <div className="flex justify-between items-center">
+                <h2 className="text-xl text-gray-500">Lista de Roles</h2>
+                <Link href={route("admin.role.create")}>
+                    <Button variant="contained" startIcon={<AddRoundedIcon />}>
+                        Crear Rol
+                    </Button>
+                </Link>
             </div>
+
+            <Table roles={roles} />
         </AdminLayout>
     );
 }

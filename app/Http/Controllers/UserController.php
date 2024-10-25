@@ -43,6 +43,7 @@ class UserController extends Controller
 
         $newUser = User::create($request->all());
         
+        // asignando roles al usuario
         $newUser->assignRole($request->roles);
 
         return to_route('admin.user.index')->with('flash',[
@@ -79,12 +80,14 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
 
+        // comprueba si elpassword a cambiado
         if( $request->password != '' ){
             $user->password = $request->password;
         }
 
         $user->save();
 
+        // actualizando los roles del ususario
         $user->assignRole($request->roles);
 
         return to_route('admin.user.index')->with('flash',[
