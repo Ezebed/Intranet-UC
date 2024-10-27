@@ -82,6 +82,19 @@ export default function AsideDrawer({ auth, drawerWidth }) {
                 },
             ],
         },
+        {
+            hasPermission: permissions.some(
+                (permission) => permission.name === "isAdmin"
+            ),
+            subHeaderText: "Documentos",
+            routes: [
+                {
+                    linkText: "Oficios",
+                    routeName: "document.index",
+                },
+            ],
+        },
+
     ];
 
     // definicion de las rutas que se renderizaran en el drawer
