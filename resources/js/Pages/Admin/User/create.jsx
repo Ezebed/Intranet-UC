@@ -14,25 +14,23 @@ export default function UserCreate({ auth, roles }) {
     return (
         <AdminLayout auth={auth}>
             <Head title="Crear Usuario" />
-            <div className="m-4 p-4 bg-white">
-                <div className="flex justify-between items-center">
-                    <h2 className="text-xl text-gray-500">Crear Usuario</h2>
-                    <Link href={route("admin.user.index")}>
-                        <Tooltip title="Regresar">
-                            <IconButton size="large">
-                                <ArrowCircleLeftRoundedIcon fontSize="inherit" />
-                            </IconButton>
-                        </Tooltip>
-                    </Link>
-                </div>
-
-                <Form
-                    roles={roles}
-                    passwordRequired={true}
-                    method="post"
-                    routeName="admin.user.store"
-                />
+            <div className="flex justify-between items-center">
+                <h2 className="text-xl text-gray-500">Crear Usuario</h2>
+                <Link href={route("admin.user.index")}>
+                    <Tooltip title="Regresar">
+                        <IconButton size="large">
+                            <ArrowCircleLeftRoundedIcon fontSize="inherit" />
+                        </IconButton>
+                    </Tooltip>
+                </Link>
             </div>
+
+            <Form
+                roles={roles}
+                passwordRequired={true}
+                method="post"
+                routeName="admin.user.store"
+            />
         </AdminLayout>
     );
 }

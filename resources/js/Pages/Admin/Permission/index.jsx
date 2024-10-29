@@ -22,21 +22,16 @@ export default function PermissionIndex({ auth, permissions, flash }) {
                     severity={alert.severity}
                 />
             )}
-            <div className="m-4 p-4 bg-white">
-                <div className="flex justify-between items-center">
-                    <h2 className="text-xl text-gray-500">Lista de Permisos</h2>
-                    <Link href={route("admin.permission.create")}>
-                        <Button
-                            variant="contained"
-                            startIcon={<AddRoundedIcon />}
-                        >
-                            Crear Permiso
-                        </Button>
-                    </Link>
-                </div>
-
-                <Table permissions={permissions} />
+            <div className="flex justify-between items-center">
+                <h2 className="text-xl text-gray-500">Lista de Permisos</h2>
+                <Link href={route("admin.permission.create")}>
+                    <Button variant="contained" startIcon={<AddRoundedIcon />}>
+                        Crear Permiso
+                    </Button>
+                </Link>
             </div>
+
+            <Table permissions={permissions} />
         </AdminLayout>
     );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import AsideDrawer from "@/_Partials/AsideDrawer";
+import AsideDrawer from "@/_Partials/AsideDrawer/AsideDrawer";
 import Toolbar from "@mui/material/Toolbar";
 
 export default function AdminLayout({ auth, children }) {
@@ -25,7 +25,9 @@ export default function AdminLayout({ auth, children }) {
             >
                 <Toolbar />
 
-                {children}
+                <div className="m-4 p-4 bg-white max-w-[1200px]">
+                    {children}
+                </div>
             </Box>
         </Box>
     );

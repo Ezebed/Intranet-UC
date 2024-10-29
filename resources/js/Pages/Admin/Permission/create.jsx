@@ -14,20 +14,18 @@ export default function PermissionCreate({ auth }) {
     return (
         <AdminLayout auth={auth}>
             <Head title="Editar Rol" />
-            <div className="m-4 p-4 bg-white">
-                <div className="flex justify-between items-center">
-                    <h2 className="text-xl text-gray-500">Crear Permiso</h2>
-                    <Link href={route("admin.permission.index")}>
-                        <Tooltip title="Regresar">
-                            <IconButton size="large">
-                                <ArrowCircleLeftRoundedIcon fontSize="inherit" />
-                            </IconButton>
-                        </Tooltip>
-                    </Link>
-                </div>
-
-                <Form method="post" routeName="admin.permission.store" />
+            <div className="flex justify-between items-center">
+                <h2 className="text-xl text-gray-500">Crear Permiso</h2>
+                <Link href={route("admin.permission.index")}>
+                    <Tooltip title="Regresar">
+                        <IconButton size="large">
+                            <ArrowCircleLeftRoundedIcon fontSize="inherit" />
+                        </IconButton>
+                    </Tooltip>
+                </Link>
             </div>
+
+            <Form method="post" routeName="admin.permission.store" />
         </AdminLayout>
     );
 }
