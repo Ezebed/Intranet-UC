@@ -112,7 +112,6 @@ export default function AsideDrawer({ auth, drawerWidth }) {
                 },
             ],
         },
-
     ];
     // ************************************************************************************
     // definicion de las rutas que se renderizaran en el drawer

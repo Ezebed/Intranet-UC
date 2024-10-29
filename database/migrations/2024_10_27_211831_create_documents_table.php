@@ -20,8 +20,8 @@ return new class extends Migration
             
             $table->string('title');
             $table->text('description');
-            $table->timestamp('approved_at')->nullable;
-            $table->timestamp('sent_at')->nullable;
+            $table->timestamp('approved_at')->nullable();
+            $table->timestamp('sent_at')->nullable();
             $table->timestamps();
         });
     }
