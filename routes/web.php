@@ -8,6 +8,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DocumentController;
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -42,6 +44,11 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::resource('/admin/user', UserController::class )
             ->only(['index','create','store','edit','update','destroy'])
             ->names('admin.user');
+
+    Route::resource('/document', DocumentController::class )
+        ->only(['index','create','show','edit','update','destroy'])
+        ->names('document');
+
 });
 
 require __DIR__.'/auth.php';
