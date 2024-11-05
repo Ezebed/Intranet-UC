@@ -1,5 +1,16 @@
 import React from "react";
 
+/**
+ * Atrapa Errores no cacheados de JavaScript y en caso de error elcontenido esreemplazadopor otro componente FallBack.
+ *
+ * @class ErrorBoundary
+ *
+ * @property {React.Node} FallBackComponent elemento a motrarse si el contenido del errorBoundary lanza un error.
+ * @property {React.Node} children elemeto a mostrar si no hay ningun error presente.
+ * @property {any} resetCondition condicion para indicar si se soluciono el error y volver a mostrar el contenido del errorBoundary.
+ *
+ * @private {Boolean} hasError indica al ErrorBoundary si debe mostrar el elemento fallback o no.
+ */
 export default class ErrorBoundary extends React.Component {
     constructor(props) {
         super(props);
