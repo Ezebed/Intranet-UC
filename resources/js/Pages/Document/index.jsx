@@ -1,5 +1,5 @@
 import AdminLayout from "@/Layouts/AdminLayout";
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import React from 'react';
 
 import Table from '@mui/material/Table';
@@ -14,11 +14,10 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
 export default function DocumentIndex({auth, documents, created_at}) {
 
-  const isAdmin = auth.permissions.find(permission => permission.name === 'isAdmin' );
   const paperElevation = 5;
 
   return (
-    <AdminLayout user={auth.user} >
+    <AdminLayout auth={auth} >
       <Head title="Oficios" /> 
       <div className="m-4 p-4 bg-white">
         <div className="flex justify-between items-center">
