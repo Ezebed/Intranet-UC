@@ -10,6 +10,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 
 import TopBar from "@/_Partials/TopBar";
+import LinkList from "@/_Partials/AsideDrawer/LinkList";
 import DrawerLink from "@/Components/DrawerLink";
 import { Link } from "@inertiajs/react";
 
@@ -36,7 +37,24 @@ export default function AsideDrawer({ auth, drawerWidth }) {
     // permission es un array de objetos, cada objeto es un permiso
     const { user, permissions } = auth;
 
+    // ************************************************************************************
     // definicion de las rutas que se renderizaran en el drawer
+    // ************************************************************************************
+
+    /**
+     * Lsita de objetos que representan a las utas que se mostraran en el menu de navegacion
+     * @namespaces
+     * @property {Object} RouteList objeto que representa al titulo de una seccion de rutas y dichas rutas
+     *
+     * @property {Boolean} RouteList.hasPermission indica si el usuarios tiene el permiso para acceder a dicha ruta
+     * @property {String} RouteList.subHeaderText indica el ambito de las rutas que abarca
+     * @property {Array} RouteList.routes array de rutas pertenecientes a una seccion
+     *
+     * @property {Object} route objeto que indica una ruta
+     * @property {String} route.linkText texto que se mostrara alusuario en el link
+     * @property {String} route.routeName nombre de la ruta ala cual se redirecciona
+     *
+     */
     const drawerRoutesList = [
         {
             hasPermission: permissions.some(
@@ -94,11 +112,14 @@ export default function AsideDrawer({ auth, drawerWidth }) {
                 },
             ],
         },
-
     ];
-
+    // ************************************************************************************
     // definicion de las rutas que se renderizaran en el drawer
+    // ************************************************************************************
 
+    // ************************************************************************************
+    // definbicion de los colores utilizados en el drawer
+    // ************************************************************************************
     const darkTheme = createTheme({
         palette: {
             mode: "dark",
@@ -112,7 +133,13 @@ export default function AsideDrawer({ auth, drawerWidth }) {
             },
         },
     });
+    // ************************************************************************************
+    // definbicion de los colores utilizados en el drawer
+    // ************************************************************************************
 
+    // ************************************************************************************
+    // definicion de los elementos del drawer
+    // ************************************************************************************
     const drawer = (
         <div>
             <Box className="h-20 bg-[#161c25] grid place-content-center">
@@ -124,19 +151,10 @@ export default function AsideDrawer({ auth, drawerWidth }) {
                 {drawerRoutesList.map((drawerRoute, index) => {
                     if (drawerRoute.hasPermission) {
                         return (
-                            <List
+                            <LinkList
                                 key={index}
                                 // texto cabecera de las rutas en el drawer
-                                subheader={
-                                    <ListSubheader
-                                        component="div"
-                                        id="role-and-permission"
-                                    >
-                                        <span className="ml-2 text-[#7267ef] capitalize">
-                                            {drawerRoute.subHeaderText}
-                                        </span>
-                                    </ListSubheader>
-                                }
+                                subHeaderText={drawerRoute.subHeaderText}
                             >
                                 {/* lista debotones de cada ruta */}
                                 {drawerRoute.routes.map((route, index) => (
@@ -146,7 +164,7 @@ export default function AsideDrawer({ auth, drawerWidth }) {
                                         routeName={route.routeName}
                                     />
                                 ))}
-                            </List>
+                            </LinkList>
                         );
                     }
                 })}
@@ -180,6 +198,9 @@ export default function AsideDrawer({ auth, drawerWidth }) {
             </nav>
         </div>
     );
+    // ************************************************************************************
+    // definicion de los elementos del drawer
+    // ************************************************************************************
 
     return (
         <>

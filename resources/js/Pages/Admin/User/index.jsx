@@ -22,21 +22,16 @@ export default function UserIndex({ auth, users, flash }) {
                     severity={alert.severity}
                 />
             )}
-            <div className="m-4 p-4 bg-white">
-                <div className="flex justify-between items-center">
-                    <h2 className="text-xl text-gray-500">Lista de Usuarios</h2>
-                    <Link href={route("admin.user.create")}>
-                        <Button
-                            variant="contained"
-                            startIcon={<AddRoundedIcon />}
-                        >
-                            Crear Usuario
-                        </Button>
-                    </Link>
-                </div>
-
-                <Table users={users} />
+            <div className="flex justify-between items-center">
+                <h2 className="text-xl text-gray-500">Lista de Usuarios</h2>
+                <Link href={route("admin.user.create")}>
+                    <Button variant="contained" startIcon={<AddRoundedIcon />}>
+                        Crear Usuario
+                    </Button>
+                </Link>
             </div>
+
+            <Table users={users} />
         </AdminLayout>
     );
 }

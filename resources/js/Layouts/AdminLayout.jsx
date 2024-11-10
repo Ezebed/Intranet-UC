@@ -2,8 +2,10 @@ import React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import AsideDrawer from "@/_Partials/AsideDrawer";
+import AsideDrawer from "@/_Partials/AsideDrawer/AsideDrawer";
 import Toolbar from "@mui/material/Toolbar";
+import { ErrorBoundary } from "@/utilities/ErrorBaundary";
+import { GenericErrorFallBack } from "@/Components/fallbackErrors";
 
 export default function AdminLayout({ auth, children }) {
     const drawerWidth = 280;
@@ -25,7 +27,11 @@ export default function AdminLayout({ auth, children }) {
             >
                 <Toolbar />
 
-                {children}
+                <div className="m-4 p-4 bg-white max-w-[1200px]">
+                    <ErrorBoundary fallBackComponent={<GenericErrorFallBack />}>
+                        {children}
+                    </ErrorBoundary>
+                </div>
             </Box>
         </Box>
     );
