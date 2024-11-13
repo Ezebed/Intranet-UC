@@ -1,4 +1,3 @@
-import Layout from "./Layout";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { Head } from "@inertiajs/react";
 import React from "react";
@@ -14,7 +13,7 @@ export default function Welcome({ auth }) {
         (permission) => permission.name === "isAdmin"
     );
 
-    const { t } = useTranslation();
+    const { t } = useTranslation(["translation", "test"]);
 
     return (
         <AdminLayout auth={auth}>
@@ -72,15 +71,32 @@ export default function Welcome({ auth }) {
                 <h2 className="text-xl font-bold">i18n tests</h2>
                 <br />
                 <h3>test with key:</h3>
-                <p>{t("resource Details", { resource: "hola mundo" })}</p>
+                <p>
+                    {t(
+                        "Great! You have accepted the invitation to join the team team.",
+                        { team: "Intranet UC" }
+                    )}
+                </p>
+
                 <br />
+
+                <h3>test Plurals </h3>
+                <p>{t("amount selected", { amount: 5, count: 5 })}</p>
+                <p>{t("amount selected", { amount: 1, count: 1 })}</p>
+
+                <br />
+
                 <h3>test without key:</h3>
                 <p>
                     {t(
                         "An unexpected error occurred and we have notified our support team. Please try again later."
                     )}
                 </p>
-                <p>{t("hola")}</p>
+
+                <br />
+
+                <h3>test namespaces translations</h3>
+                <p>{t("hola", { ns: "test" })}</p>
             </section>
         </AdminLayout>
     );
