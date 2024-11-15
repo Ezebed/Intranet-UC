@@ -798,6 +798,7 @@
     "We were unable to find a registered user with this email address.": "No pudimos encontrar un usuario registrado con esta dirección de correo electrónico.",
     "We will send a receipt download link to the email addresses that you specify below. You may separate multiple email addresses using commas.": "Enviaremos un enlace de descarga de recibo a las direcciones de correo electrónico que especifique a continuación. Puede separar varias direcciones de correo electrónico con comas.",
     "We're lost in space. The page you were trying to view does not exist.": "Estamos perdidos en el espacio. La página que intenta buscar no existe.",
+    "Welcome": "Bienvenido",
     "Welcome Back!": "¡Bienvenido de nuevo!",
     "Western Sahara": "Sahara Occidental",
     "When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.": "Cuando la autenticación de dos factores esté habilitada, le pediremos un token aleatorio seguro durante la autenticación. Puede recuperar este token desde la aplicación Google Authenticator de su teléfono.",

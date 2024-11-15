@@ -17,7 +17,7 @@ export default function Welcome({ auth }) {
 
     return (
         <AdminLayout auth={auth}>
-            <Head title="Welcome" />
+            <Head title="test Page" />
 
             <section className="mb-4">
                 <h1 className="text-xl font-bold">Welcome</h1>

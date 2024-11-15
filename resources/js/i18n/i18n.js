@@ -8,7 +8,7 @@ i18n.use(Backend)
         fallbackLng: "en", // fallback language
         lng: "es",
         ns: ["translation", "test"],
-        DefaultNs: "translation",
+        DefaultNs: "test",
         debug: true, // enable debug mode for development
         interpolation: {
             escapeValue: false, // react already does escaping
