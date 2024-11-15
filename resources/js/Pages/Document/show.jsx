@@ -12,7 +12,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
-export default function DocumentIndex({ auth, documents, created_at }) {
+export default function DocumentShow({ auth, documents, created_at }) {
     const isAdmin = auth.permissions.find(
         (permission) => permission.name === "isAdmin"
     );
