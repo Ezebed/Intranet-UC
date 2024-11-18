@@ -1,0 +1,8 @@
+{
+    "role_one": "rol",
+    "role_other": "roles",
+    "listOfField": "lista de {{field}}",
+    "button": {
+        "createField": "crear {{field}}"
+    }
+}

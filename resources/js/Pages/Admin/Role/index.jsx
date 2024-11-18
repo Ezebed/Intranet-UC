@@ -9,12 +9,16 @@ import Alert from "@/Components/Alert";
 
 import Table from "@/Pages/Admin/Role/components/Table";
 
+import { useTranslation } from "react-i18next";
+
 export default function RoleIndex({ auth, roles, flash }) {
     const alert = flash?.alert;
 
+    const { t } = useTranslation(["common"]);
+
     return (
         <AdminLayout auth={auth}>
-            <Head title="Roles" />
+            <Head title={t("role", { count: 2 })} />
             {alert && (
                 <Alert
                     key={alert.id}
@@ -24,10 +28,14 @@ export default function RoleIndex({ auth, roles, flash }) {
             )}
 
             <div className="flex justify-between items-center">
-                <h2 className="text-xl text-gray-500">Lista de Roles</h2>
+                <h2 className="text-xl text-gray-500 capitalize">
+                    {t("listOfField", { field: t("role", { count: 2 }) })}
+                </h2>
                 <Link href={route("admin.role.create")}>
                     <Button variant="contained" startIcon={<AddRoundedIcon />}>
-                        Crear Rol
+                        {t("button.createField", {
+                            field: t("role", { count: 1 }),
+                        })}
                     </Button>
                 </Link>
             </div>

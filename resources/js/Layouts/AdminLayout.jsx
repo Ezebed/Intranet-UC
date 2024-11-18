@@ -27,7 +27,7 @@ export default function AdminLayout({ auth, children }) {
             >
                 <Toolbar />
 
-                <div className="m-4 p-4 bg-white max-w-[1200px]">
+                <div className="m-4 p-4 bg-white max-w-[1200px] shadow-xl">
                     <ErrorBoundary fallBackComponent={<GenericErrorFallBack />}>
                         {children}
                     </ErrorBoundary>
