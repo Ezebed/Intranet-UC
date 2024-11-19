@@ -20,7 +20,7 @@ export default function DeleteDialog({ role }) {
         setOpen(false);
     };
 
-    const { t } = useTranslation(["translation"]);
+    const { t } = useTranslation(["translation", "common"]);
 
     return (
         <>
@@ -41,19 +41,23 @@ export default function DeleteDialog({ role }) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"¿Eliminar el Rol " + role.name + "?"}
+                    {t("delete resource?", {
+                        resource: t("role", { count: 1, ns: "common" }),
+                        resourceName: role.name,
+                        ns: "common",
+                    })}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Estas a punto de eliminar un rol, esta accion es
-                        irreversible.
-                        <br></br>
-                        ¿Estas seguro de eliminar el rol?.
+                        {t("do you want delete resource?", {
+                            resource: t("role", { count: 1, ns: "common" }),
+                            ns: "common",
+                        })}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button variant="contained" onClick={handleClose} autofocus>
-                        Cancelar
+                        {t("Cancel")}
                     </Button>
                     <Link
                         href={route("admin.role.destroy", role)}
@@ -66,7 +70,7 @@ export default function DeleteDialog({ role }) {
                             color="error"
                             onClick={handleClose}
                         >
-                            Eliminar
+                            {t("Delete")}
                         </Button>
                     </Link>
                 </DialogActions>

@@ -35,4 +35,16 @@ i18n.use(Backend)
         },
     });
 
+i18n.services.formatter.add("lowercase", (value, lng, options) => {
+    return value.toLowerCase();
+});
+
+i18n.services.formatter.add("uppercase", (value, lng, options) => {
+    return value.toUpperCase();
+});
+
+i18n.services.formatter.add("capitalize", (value, lng, options) => {
+    return value[0].toUpperCase() + value.substring(1);
+});
+
 export default i18n;

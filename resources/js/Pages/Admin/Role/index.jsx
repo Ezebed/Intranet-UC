@@ -29,11 +29,11 @@ export default function RoleIndex({ auth, roles, flash }) {
 
             <div className="flex justify-between items-center">
                 <h2 className="text-xl text-gray-500 capitalize">
-                    {t("listOfField", { field: t("role", { count: 2 }) })}
+                    {t("list of field", { field: t("role", { count: 2 }) })}
                 </h2>
                 <Link href={route("admin.role.create")}>
                     <Button variant="contained" startIcon={<AddRoundedIcon />}>
-                        {t("button.createField", {
+                        {t("button.create field", {
                             field: t("role", { count: 1 }),
                         })}
                     </Button>

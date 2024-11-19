@@ -1,8 +1,11 @@
 {
-    "role_one": "rol",
-    "role_other": "roles",
-    "listOfField": "lista de {{field}}",
     "button": {
-        "createField": "crear {{field}}"
-    }
+        "create field": "Crear {{field}}",
+        "go back": "Regresar"
+    },
+    "delete resource?": "¿Eliminar el {{resource}} {{resourceName}}?",
+    "do you want delete resource?": "Estas a punto de eliminar un {{resource}}, esta accion es irreversible. ¿Estas seguro que desea eliminar el {{resource}}?.",
+    "list of field": "lista de {{field}}",
+    "role_one": "Rol",
+    "role_other": "Roles"
 }

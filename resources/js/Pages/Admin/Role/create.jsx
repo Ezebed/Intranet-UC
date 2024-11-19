@@ -9,16 +9,26 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 
 import Form from "@/Pages/Admin/Role/components/Form";
+import { useTranslation } from "react-i18next";
 
 export default function RoleCreate({ auth, permissions }) {
+    const { t } = useTranslation(["common"]);
     return (
         <AdminLayout auth={auth}>
-            <Head title="Editar Rol" />
+            <Head
+                title={t("button.create field", {
+                    field: t("role", { count: 1 }),
+                })}
+            />
 
             <div className="flex justify-between items-center">
-                <h2 className="text-xl text-gray-500">Crear Rol</h2>
+                <h2 className="text-xl text-gray-500">
+                    {t("button.create field", {
+                        field: t("role", { count: 1 }),
+                    })}
+                </h2>
                 <Link href={route("admin.role.index")}>
-                    <Tooltip title="Regresar">
+                    <Tooltip title={t("button.go back")}>
                         <IconButton size="large">
                             <ArrowCircleLeftRoundedIcon fontSize="inherit" />
                         </IconButton>
