@@ -10,9 +10,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
 
-export default function DocumentIndex({ auth, documents, created_at }) {
+export default function DocumentShow({ auth, document, created_at }) {
     const isAdmin = auth.permissions.find(
         (permission) => permission.name === "isAdmin"
     );
@@ -22,15 +25,25 @@ export default function DocumentIndex({ auth, documents, created_at }) {
         <AdminLayout auth={auth}>
             <Head title="Oficios" />
 
+            <div class="items-right">
+                <Link href={route("document.index")}>
+                    <Tooltip title="Regresar">
+                        <IconButton size="large">
+                            <ArrowCircleLeftRoundedIcon fontSize="inherit" />
+                        </IconButton>
+                    </Tooltip>
+                </Link>
+            </div>
             <div className="flex justify-between items-center">
-                <h2 className="text-xl text-gray-500">Documentos</h2>
-                <Link href="#">
-                    <Button variant="contained" startIcon={<AddRoundedIcon />}>
-                        Crear
+                <h2 className="text-xl text-gray-500">
+                    {document.serial_number}
+                </h2>
+                <Link href={route("document.edit", document)}>
+                    <Button variant="contained" startIcon={<EditIcon />}>
+                        Editar
                     </Button>
                 </Link>
             </div>
-
             <TableContainer
                 component={Paper}
                 elevation={paperElevation}
@@ -40,59 +53,84 @@ export default function DocumentIndex({ auth, documents, created_at }) {
                     sx={{ minWidth: { xs: 300, sm: 650 } }}
                     aria-label="simple table"
                 >
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="left">Serial</TableCell>
-                            <TableCell align="left">Dirigido A</TableCell>
-                            <TableCell align="left">Título</TableCell>
-                            <TableCell align="left">
-                                Fecha de Creación
-                            </TableCell>
-                            <TableCell align="left">
-                                Fecha de Aprobación
-                            </TableCell>
-                            <TableCell align="left">Fecha de Envío</TableCell>
-                        </TableRow>
-                    </TableHead>
                     <TableBody>
-                        {documents.map((document) => (
-                            <TableRow
-                                key={document.id}
-                                sx={{
-                                    "&:last-child td, &:last-child th": {
-                                        border: 0,
-                                    },
-                                }}
-                            >
-                                <TableCell align="left">
-                                    <Link
-                                        className="bg-[#02182B] text-white inline-block p-2 rounded"
-                                        href={route(
-                                            "document.show",
-                                            document,
-                                            created_at[document.id]
-                                        )}
-                                    >
-                                        {document.serial_number}
-                                    </Link>
-                                </TableCell>
-                                <TableCell align="left">
-                                    {document.directed_to.name}
-                                </TableCell>
-                                <TableCell align="left">
-                                    {document.title}
-                                </TableCell>
-                                <TableCell align="left">
-                                    {created_at[document.id]}
-                                </TableCell>
-                                <TableCell align="left">
-                                    {document.approved_at}
-                                </TableCell>
-                                <TableCell align="left">
-                                    {document.sent_at}
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                        <TableRow
+                            key={document.id}
+                            sx={{
+                                "&:last-child td, &:last-child th": {
+                                    border: 0,
+                                },
+                            }}
+                        >
+                            <TableCell align="left">
+                                <span className="font-bold">Solicitante: </span>
+                                {document.applicant.name}
+                            </TableCell>
+                            <TableCell align="left">
+                                <span className="font-bold">
+                                    Fecha de Creación:{" "}
+                                </span>
+                                {created_at}
+                            </TableCell>
+                        </TableRow>
+                        <TableRow
+                            key={document.id}
+                            sx={{
+                                "&:last-child td, &:last-child th": {
+                                    border: 0,
+                                },
+                            }}
+                        >
+                            <TableCell align="left">
+                                <span className="font-bold">Dirigido A: </span>
+                                {document.directed_to.name}
+                            </TableCell>
+                            <TableCell align="left">
+                                <span className="font-bold">
+                                    Fecha de Aprobación:{" "}
+                                </span>
+                                {document.approved_at}
+                            </TableCell>
+                        </TableRow>
+                        <TableRow
+                            key={document.id}
+                            sx={{
+                                "&:last-child td, &:last-child th": {
+                                    border: 0,
+                                },
+                            }}
+                        >
+                            <TableCell align="left">
+                                <span className="font-bold">Titulo: </span>
+                                {document.title}
+                            </TableCell>
+                            <TableCell align="left">
+                                <span className="font-bold">
+                                    Fecha de Envío:{" "}
+                                </span>
+                                {document.sent_at}
+                            </TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+                <Table
+                    sx={{ minWidth: { xs: 300, sm: 650 } }}
+                    aria-label="simple table"
+                >
+                    <TableBody>
+                        <TableRow
+                            key={document.id}
+                            sx={{
+                                "&:last-child td, &:last-child th": {
+                                    border: 0,
+                                },
+                            }}
+                        >
+                            <TableCell align="left">
+                                <span className="font-bold">Descripción: </span>
+                                {document.description}
+                            </TableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
             </TableContainer>
