@@ -6,6 +6,10 @@
     "delete resource?": "¿Eliminar el {{resource}} {{resourceName}}?",
     "do you want delete resource?": "Estas a punto de eliminar un {{resource}}, esta accion es irreversible. ¿Estas seguro que desea eliminar el {{resource}}?.",
     "list of field": "lista de {{field}}",
+    "permission_one": "Permiso",
+    "permission_other": "Permisos",
     "role_one": "Rol",
-    "role_other": "Roles"
+    "role_other": "Roles",
+    "user_one": "Usuario",
+    "user_other": "Usuarios"
 }
