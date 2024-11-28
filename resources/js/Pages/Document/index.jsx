@@ -18,6 +18,7 @@ export default function DocumentIndex({ auth, documents, created_at }) {
     );
     const paperElevation = 5;
 
+
     return (
         <AdminLayout auth={auth}>
             <Head title="Oficios" />
