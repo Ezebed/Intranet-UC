@@ -4,6 +4,7 @@
         "go back": "Regresar"
     },
     "delete resource?": "¿Eliminar el {{resource}} {{resourceName}}?",
+
     "do you want delete resource?": "Estas a punto de eliminar un {{resource}}, esta accion es irreversible. ¿Estas seguro que desea eliminar el {{resource}}?.",
     "list of field": "lista de {{field}}",
     "permission_one": "Permiso",
