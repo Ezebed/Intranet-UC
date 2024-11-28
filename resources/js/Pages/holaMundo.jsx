@@ -70,7 +70,7 @@ export default function Welcome({ auth }) {
             <section className="mb-4">
                 <h2 className="text-xl font-bold">i18n tests</h2>
                 <br />
-                <h3>test with key:</h3>
+                <h3 className="font-bold">test with key:</h3>
                 <p>
                     {t(
                         "Great! You have accepted the invitation to join the team team.",
@@ -80,13 +80,13 @@ export default function Welcome({ auth }) {
 
                 <br />
 
-                <h3>test Plurals </h3>
+                <h3 className="font-bold">test Plurals:</h3>
                 <p>{t("amount selected", { amount: 5, count: 5 })}</p>
                 <p>{t("amount selected", { amount: 1, count: 1 })}</p>
 
                 <br />
 
-                <h3>test without key:</h3>
+                <h3 className="font-bold">test without key:</h3>
                 <p>
                     {t(
                         "An unexpected error occurred and we have notified our support team. Please try again later."
@@ -95,7 +95,7 @@ export default function Welcome({ auth }) {
 
                 <br />
 
-                <h3>test namespaces translations</h3>
+                <h3 className="font-bold">test namespaces translations:</h3>
                 <p>{t("hola", { ns: "test" })}</p>
             </section>
         </AdminLayout>
