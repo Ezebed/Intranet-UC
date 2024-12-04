@@ -9,15 +9,31 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 
 import Form from "@/Pages/Admin/Permission/components/Form";
+import { useTranslation } from "react-i18next";
 
 export default function PermissionEdit({ auth, permission }) {
+    const { t } = useTranslation(["translation", "common"]);
     return (
         <AdminLayout auth={auth}>
-            <Head title="Editar Rol" />
+            <Head
+                title={t("Edit resource", {
+                    resource: t("permission", {
+                        count: 1,
+                        ns: "common",
+                    }),
+                })}
+            />
             <div className="flex justify-between items-center">
-                <h2 className="text-xl text-gray-500">Editar Permiso</h2>
+                <h2 className="text-xl text-gray-500">
+                    {t("Edit resource", {
+                        resource: t("permission", {
+                            count: 1,
+                            ns: "common",
+                        }),
+                    })}
+                </h2>
                 <Link href={route("admin.permission.index")}>
-                    <Tooltip title="Regresar">
+                    <Tooltip title={t("button.go back", { ns: "common" })}>
                         <IconButton size="large">
                             <ArrowCircleLeftRoundedIcon fontSize="inherit" />
                         </IconButton>
