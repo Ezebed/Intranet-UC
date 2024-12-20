@@ -1,0 +1,16 @@
+{
+    "button": {
+        "create field": "Create {{field}}",
+        "go back": "Go Back"
+    },
+    "delete resource?": "Remove the {{resource}} {{resourceName}}?",
+
+    "do you want delete resource?": "You are about to delete a {{resource}}, this action is irreversible. Are you sure you want to delete the {{resource}}?",
+    "list of field": "list of {{field}}",
+    "permission_one": "Permission",
+    "permission_other": "Permissions",
+    "role_one": "Role",
+    "role_other": "Roles",
+    "user_one": "User",
+    "user_other": "Users"
+}

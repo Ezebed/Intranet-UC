@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -11,6 +11,7 @@ import Divider from "@mui/material/Divider";
 
 import TopBar from "@/_Partials/TopBar";
 import LinkList from "@/_Partials/AsideDrawer/LinkList";
+import drawerRoutesList from "./drawerRoutesList";
 import DrawerLink from "@/Components/DrawerLink";
 import { Link } from "@inertiajs/react";
 
@@ -37,85 +38,26 @@ export default function AsideDrawer({ auth, drawerWidth }) {
     // permission es un array de objetos, cada objeto es un permiso
     const { user, permissions } = auth;
 
-    // ************************************************************************************
-    // definicion de las rutas que se renderizaran en el drawer
-    // ************************************************************************************
-
     /**
-     * Lsita de objetos que representan a las utas que se mostraran en el menu de navegacion
-     * @namespaces
-     * @property {Object} RouteList objeto que representa al titulo de una seccion de rutas y dichas rutas
+     * Hook que verifica si el usuario tiene un permiso específico.
      *
-     * @property {Boolean} RouteList.hasPermission indica si el usuarios tiene el permiso para acceder a dicha ruta
-     * @property {String} RouteList.subHeaderText indica el ambito de las rutas que abarca
-     * @property {Array} RouteList.routes array de rutas pertenecientes a una seccion
-     *
-     * @property {Object} route objeto que indica una ruta
-     * @property {String} route.linkText texto que se mostrara alusuario en el link
-     * @property {String} route.routeName nombre de la ruta ala cual se redirecciona
-     *
+     * @param {Array} permissions - Lista de objetos de permiso del usuario.
+     * @returns {Function} Función que toma el nombre de un permiso y devuelve un booleano que indica si el permiso está presente.
      */
-    const drawerRoutesList = [
-        {
-            hasPermission: permissions.some(
-                (permission) => permission.name === "isAdmin"
-            ),
-            subHeaderText: "Navegacion",
-            routes: [
-                {
-                    linkText: "Dashboard",
-                    routeName: "dashboard",
-                },
-                {
-                    linkText: "Hola",
-                    routeName: "hola",
-                },
-            ],
+    const hasPermission = useCallback(
+        (permissionNeeded) => {
+            /**
+             * Verifica si el permiso necesario está presente en la lista de permisos.
+             *
+             * @param {string} permissionNeeded - El nombre del permiso que se necesita verificar.
+             * @returns {boolean} Retorna true si el permiso está presente, de lo contrario false.
+             */
+            return permissions.some(
+                (permission) => permission.name === permissionNeeded
+            );
         },
-        {
-            hasPermission: permissions.some(
-                (permission) => permission.name === "isAdmin"
-            ),
-            subHeaderText: "roles y permisos",
-            routes: [
-                {
-                    linkText: "Roles",
-                    routeName: "admin.role.index",
-                },
-                {
-                    linkText: "Permisos",
-                    routeName: "admin.permission.index",
-                },
-            ],
-        },
-        {
-            hasPermission: permissions.some(
-                (permission) => permission.name === "isAdmin"
-            ),
-            subHeaderText: "Usuarios",
-            routes: [
-                {
-                    linkText: "Usuarios",
-                    routeName: "admin.user.index",
-                },
-            ],
-        },
-        {
-            hasPermission: permissions.some(
-                (permission) => permission.name === "isAdmin"
-            ),
-            subHeaderText: "Documentos",
-            routes: [
-                {
-                    linkText: "Oficios",
-                    routeName: "document.index",
-                },
-            ],
-        },
-    ];
-    // ************************************************************************************
-    // definicion de las rutas que se renderizaran en el drawer
-    // ************************************************************************************
+        [permissions]
+    );
 
     // ************************************************************************************
     // definbicion de los colores utilizados en el drawer
@@ -149,7 +91,7 @@ export default function AsideDrawer({ auth, drawerWidth }) {
             <nav>
                 {/* rutas del drawer */}
                 {drawerRoutesList.map((drawerRoute, index) => {
-                    if (drawerRoute.hasPermission) {
+                    if (hasPermission(drawerRoute.permissionNeeded)) {
                         return (
                             <LinkList
                                 key={index}

@@ -8,13 +8,16 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import Alert from "@/Components/Alert";
 
 import Table from "@/Pages/Admin/Permission/components/Table";
+import { useTranslation } from "react-i18next";
 
 export default function PermissionIndex({ auth, permissions, flash }) {
     const alert = flash?.alert;
 
+    const { t } = useTranslation(["common"]);
+
     return (
         <AdminLayout auth={auth}>
-            <Head title="Permisos" />
+            <Head title={t("permission", { count: 2 })} />
             {alert && (
                 <Alert
                     key={alert.id}
@@ -23,10 +26,16 @@ export default function PermissionIndex({ auth, permissions, flash }) {
                 />
             )}
             <div className="flex justify-between items-center">
-                <h2 className="text-xl text-gray-500">Lista de Permisos</h2>
+                <h2 className="text-xl text-gray-500 capitalize">
+                    {t("list of field", {
+                        field: t("permission", { count: 2 }),
+                    })}
+                </h2>
                 <Link href={route("admin.permission.create")}>
                     <Button variant="contained" startIcon={<AddRoundedIcon />}>
-                        Crear Permiso
+                        {t("button.create field", {
+                            field: t("permission", { count: 1 }),
+                        })}
                     </Button>
                 </Link>
             </div>
