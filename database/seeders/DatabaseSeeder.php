@@ -20,12 +20,12 @@ class DatabaseSeeder extends Seeder
 
         $adminUser = User::factory()->create([
             'name' => 'Admin User',
-            'email' => 'admin@example.com',
+            'email' => 'admini@example.com',
         ]);
 
         User::factory()->create([
             'name' => 'Regular User',
-            'email' => 'regular@example.com',
+            'email' => 'regulari@example.com',
         ]);
 
         // Permissions and Roles
