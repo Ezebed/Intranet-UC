@@ -35,16 +35,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             "name"  => "required",
             "email" => "required|email|unique:Users,email",
-            "password" => "required"
+            "password" => "required",
         ]);
 
-        $newUser = User::create($request->all());
+        $newUser = new User();
+        $newUser->name = $request->name;
+        $newUser->email = $request->email;
+        $newUser->internal_position = $request->internal_position;
+
+
+        // comprueba si elpassword a cambiado
+        if( $request->password != '' ){
+            $newUser->password = $request->password;
+        }
+
+        $newUser->save();
         
         // asignando roles al usuario
-        $newUser->assignRole($request->roles);
+        $newUser->syncRoles($request->roles);
 
         return to_route('admin.user.index')->with('flash',[
             'alert' => [
@@ -60,10 +72,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        
         return Inertia::render('Admin/User/edit',[
             'user' => $user,
             'userRoles' => $user->getRoleNames(),
-            'roles' => Role::all()
+            'roles' => Role::all(),
         ]);
     }
 
@@ -74,11 +87,14 @@ class UserController extends Controller
     {
         $request->validate([
             "name"  => "required",
-            "email" => "required|email"
+            "email" => "required|email",
         ]);
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->internal_position = $request->internal_position;
+
+
 
         // comprueba si elpassword a cambiado
         if( $request->password != '' ){
@@ -88,7 +104,8 @@ class UserController extends Controller
         $user->save();
 
         // actualizando los roles del ususario
-        $user->assignRole($request->roles);
+        $user->syncRoles($request->roles);
+
 
         return to_route('admin.user.index')->with('flash',[
             'alert' => [

@@ -9,15 +9,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import DeleteDialog from "@/Pages/DocumentResponse/components/DeleteDialog";
+import { useTranslation } from "react-i18next";
+import Alert from "@/Components/Alert";
 import Button from "@mui/material/Button";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import DeleteDialog from "@/Pages/Document/components/DeleteDialog";
-import { useTranslation } from "react-i18next";
-import Badge from "@/Pages/Document/components/Badge";
-import Alert from "@/Components/Alert";
 
 
-export default function DocumentIndex({ auth, documents, created_at, flash }) {
+export default function DocumentResponseIndex({ auth, responses, created_at, flash }) {
     const paperElevation = 5;
     const { t } = useTranslation("common");
     const alert = flash?.alert;
@@ -26,6 +25,7 @@ export default function DocumentIndex({ auth, documents, created_at, flash }) {
     const isDirector = auth.permissions.find(
         (permission) => permission.name === "isDirector"
     );
+
 
 
     return (
@@ -39,14 +39,15 @@ export default function DocumentIndex({ auth, documents, created_at, flash }) {
                 />
             )}
             <div className="flex justify-between items-center">
-                <h2 className="text-xl text-gray-500">Oficios</h2>
-                <Link href={route("document.create")}>
+                <h2 className="text-xl text-gray-500">Respuestas de Oficios</h2>
+                <Link href={route("response.create")}>
                     <Button variant="contained" startIcon={<AddRoundedIcon />}>
                         {t("button.create field", {
-                            field: t("document", { count: 1 }),
+                            field: t("document_response", { count: 1 }),
                         })}
                     </Button>
                 </Link>
+
             </div>
 
             <TableContainer
@@ -64,16 +65,13 @@ export default function DocumentIndex({ auth, documents, created_at, flash }) {
                             <TableCell align="left">Solicitante</TableCell>
                             <TableCell align="left">Dirigido A</TableCell>
                             <TableCell align="left">Fecha de Creación</TableCell>
-                            <TableCell align="left">Status</TableCell>
-                            <TableCell align="left">Respuesta</TableCell>
-                            <TableCell align="left">Serial Respuesta</TableCell>
                             <TableCell align="left"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {documents.map((document) => (
+                        {responses.map((response) => (
                             <TableRow
-                                key={document.id}
+                                key={response.id}
                                 sx={{
                                     "&:last-child td, &:last-child th": {
                                         border: 0,
@@ -84,37 +82,27 @@ export default function DocumentIndex({ auth, documents, created_at, flash }) {
                                     <Link
                                         className="bg-[#02182B] text-white inline-block p-2 rounded"
                                         href={route(
-                                            "document.show",
-                                            document,
-                                            created_at[document.id]
+                                            "response.show",
+                                            response
                                         )}
                                     >
-                                        {document.serial_number}
+                                        {response.serial_number}
                                     </Link>
                                 </TableCell>
                                 <TableCell align="left">
-                                    {document.applicant.name}
+                                    {response.applicant.name}
                                 </TableCell>
                                 <TableCell align="left">
-                                    {document.directed_to.name}
+                                    {response.directed_to.name}
                                 </TableCell>
                                 <TableCell align="left">
-                                    {created_at[document.id]}
-                                </TableCell>
-                                <TableCell>
-                                    <Badge textContent={document.status}/>
-                                </TableCell>
-                                <TableCell>
-                                    {document.has_response ? "REQUERIDA" : "NO REQUERIDA"}
-                                </TableCell>
-                                <TableCell>
-                                    {document.response_id ? document.response_id.serial_number : null}
+                                    {created_at[response.id]}
                                 </TableCell>
                                 {isDirector && (
 
                                     <TableCell align="right">
                                     <div className="flex justify-end flex-col sm:flex-row gap-2">
-                                        <DeleteDialog document={document} />
+                                        <DeleteDialog response={response} />
                                     </div>
                                     </TableCell>
 

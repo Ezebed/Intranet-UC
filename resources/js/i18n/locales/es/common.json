@@ -12,5 +12,7 @@
     "role_one": "Rol",
     "role_other": "Roles",
     "user_one": "Usuario",
-    "user_other": "Usuarios"
+    "user_other": "Usuarios",
+    "document": "Oficio",
+    "document_response" : "Respuesta de Oficio"
 }
