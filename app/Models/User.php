@@ -53,10 +53,4 @@ class User extends Authenticatable
         return $this->hasMany(Document::class);
     }
 
-    public function document_responses(): HasMany
-    {
-        return $this->hasMany(DocumentResponse::class, 'directed_to');
-    }
-
-
 }

@@ -20,9 +20,4 @@ class Document extends Model{
         return $this->belongsTo(User::class, 'applicant');
     }
 
-	public function response_id(): BelongsTo
-	{
-		return $this->belongsTo(DocumentResponse::class, 'response_id');
-	}	
-
 }

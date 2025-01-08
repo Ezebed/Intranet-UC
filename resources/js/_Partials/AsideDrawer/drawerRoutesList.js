@@ -18,7 +18,7 @@
  */
 const drawerRoutesList = [
     {
-        permissionNeeded: ["isAdmin"],
+        permissionNeeded: "isAdmin",
         subHeaderText: "Navegacion",
         routes: [
             {
@@ -32,7 +32,7 @@ const drawerRoutesList = [
         ],
     },
     {
-        permissionNeeded: ["isAdmin"],
+        permissionNeeded: "isAdmin",
         subHeaderText: "roles y permisos",
         routes: [
             {
@@ -46,7 +46,7 @@ const drawerRoutesList = [
         ],
     },
     {
-        permissionNeeded: ["isAdmin"],
+        permissionNeeded: "isAdmin",
         subHeaderText: "Usuarios",
         routes: [
             {
@@ -56,20 +56,15 @@ const drawerRoutesList = [
         ],
     },
     {
-        permissionNeeded: ["isAdmin","isDirector","isAdministrative"],
+        permissionNeeded: "isAdmin",
         subHeaderText: "Documentos",
         routes: [
             {
                 linkText: "Oficios",
                 routeName: "document.index",
             },
-            {
-                linkText: "Respuestas a Oficios",
-                routeName: "response.index",
-            },
         ],
     },
-    
 ];
 
 export default drawerRoutesList;
