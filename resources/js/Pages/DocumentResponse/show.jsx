@@ -13,14 +13,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
-import SignModal from '@/Pages/Document/components/SignModal';
-import ArticleIcon from '@mui/icons-material/Article';
-import Badge from "@/Pages/Document/components/Badge";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Alert from "@/Components/Alert";
 
-
-export default function DocumentShow({ auth, document, created_at, flash }) {
+export default function DocumentResponseShow({ auth, response, created_at, flash }) {
 
     const alert = flash?.alert;
 
@@ -29,24 +25,6 @@ export default function DocumentShow({ auth, document, created_at, flash }) {
     );
 
     const paperElevation = 5;
-    const [open, setOpen] = useState(false);
-    const [image, setImage] = useState(null);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
-    const handleImageUpload = (file) => {
-        setImage(URL.createObjectURL(file));
-    };
-
-    const { data, setData, patch } = useForm({
-        status: document?.status ?? '',
-    })
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        patch(route("document.changeStatus",document.id));
-        
-    };
 
     return (
         
@@ -61,7 +39,7 @@ export default function DocumentShow({ auth, document, created_at, flash }) {
             )}
 
             <div className="flex justify-between items-center">
-                <Link href={route("document.index")}>
+                <Link href={route("response.index")}>
                     <Tooltip title="Regresar">
                         <IconButton size="large">
                             <ArrowCircleLeftRoundedIcon fontSize="inherit" />
@@ -71,19 +49,13 @@ export default function DocumentShow({ auth, document, created_at, flash }) {
             </div>
             <div className="flex justify-between items-center">
                 <h2 className="text-xl text-gray-500">
-                    {document.serial_number}
+                    {response.serial_number}
                 </h2>
                 <div className="flex gap-x-2" >
 
-                    {(isDirector && document.status === 'PENDIENTE') && (
-                        <Button variant="contained" startIcon={<CheckCircleIcon />} onClick={handleSubmit}>
-                            Aprobar
-                        </Button>
-                    )}
 
-
-                    {(document.status === 'PENDIENTE' || isDirector) && (
-                        <Link href={route("document.edit", document)}>
+                    {(
+                        <Link href={route("response.edit", response)}>
                             <Button variant="contained" startIcon={<EditIcon />}>
                                 Editar
                             </Button>
@@ -91,28 +63,7 @@ export default function DocumentShow({ auth, document, created_at, flash }) {
                     )}
 
 
-                    {(isDirector && document.status === 'APROBADO') && (
-                        <Button variant="contained" color="error" onClick={handleOpen} startIcon={<ArticleIcon />}>
-                            Generar PDF
-                        </Button>
-                    )}
-
-                    <SignModal 
-                        open={open} 
-                        handleClose={handleClose}
-                        serial_number={document.serial_number} 
-                        created_at={created_at} 
-                        directed_to={document.directed_to.name} 
-                        applicant={document.applicant.name} 
-                        description={document.description}
-                        directedToIP={document.directed_to.internal_position}
-                        applicantToIp={document.applicant.internal_position}
-                        onImageUpload={handleImageUpload}
-                    />
                 </div>
-            </div>
-            <div>
-                <Badge textContent={document.status}/>
             </div>
             <TableContainer
                 component={Paper}
@@ -134,7 +85,7 @@ export default function DocumentShow({ auth, document, created_at, flash }) {
                         >
                             <TableCell align="left">
                                 <span className="font-bold">Solicitante: </span>
-                                {document.applicant.name}
+                                {response.applicant.name}
                             </TableCell>
                             <TableCell align="left">
                                 <span className="font-bold">
@@ -153,7 +104,7 @@ export default function DocumentShow({ auth, document, created_at, flash }) {
                         >
                             <TableCell align="left">
                                 <span className="font-bold">Dirigido A: </span>
-                                {document.directed_to.name}
+                                {response.directed_to.name}
                             </TableCell>
                         </TableRow>
                     </TableBody>
@@ -173,7 +124,7 @@ export default function DocumentShow({ auth, document, created_at, flash }) {
                         >
                             <TableCell align="left">
                                 <span className="font-bold">Descripción: </span>
-                                {document.description}
+                                {response.description}
                             </TableCell>
                         </TableRow>
                     </TableBody>
