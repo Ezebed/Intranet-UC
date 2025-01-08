@@ -53,7 +53,7 @@ export default function AsideDrawer({ auth, drawerWidth }) {
              * @returns {boolean} Retorna true si el permiso está presente, de lo contrario false.
              */
             return permissions.some(
-                (permission) => permissionNeeded.includes(permission.name)
+                (permission) => permission.name === permissionNeeded
             );
         },
         [permissions]

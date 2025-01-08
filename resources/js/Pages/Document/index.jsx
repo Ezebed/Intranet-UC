@@ -1,6 +1,6 @@
-import DocumentLayout from "@/Layouts/DocumentLayout";
+import AdminLayout from "@/Layouts/AdminLayout";
 import { Head, Link, usePage } from "@inertiajs/react";
-import { React, useState } from "react";
+import React from "react";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,40 +11,23 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import DeleteDialog from "@/Pages/Document/components/DeleteDialog";
-import { useTranslation } from "react-i18next";
-import Badge from "@/Pages/Document/components/Badge";
-import Alert from "@/Components/Alert";
 
-
-export default function DocumentIndex({ auth, documents, created_at, flash }) {
-    const paperElevation = 5;
-    const { t } = useTranslation("common");
-    const alert = flash?.alert;
-
-
-    const isDirector = auth.permissions.find(
-        (permission) => permission.name === "isDirector"
+export default function DocumentIndex({ auth, documents, created_at }) {
+    const isAdmin = auth.permissions.find(
+        (permission) => permission.name === "isAdmin"
     );
+    const paperElevation = 5;
 
 
     return (
-        <DocumentLayout auth={auth}>
+        <AdminLayout auth={auth}>
             <Head title="Oficios" />
-            {alert && (
-                <Alert
-                    key={alert.id}
-                    message={alert.message}
-                    severity={alert.severity}
-                />
-            )}
+
             <div className="flex justify-between items-center">
-                <h2 className="text-xl text-gray-500">Oficios</h2>
-                <Link href={route("document.create")}>
+                <h2 className="text-xl text-gray-500">Documentos</h2>
+                <Link href="#">
                     <Button variant="contained" startIcon={<AddRoundedIcon />}>
-                        {t("button.create field", {
-                            field: t("document", { count: 1 }),
-                        })}
+                        Crear
                     </Button>
                 </Link>
             </div>
@@ -61,13 +44,15 @@ export default function DocumentIndex({ auth, documents, created_at, flash }) {
                     <TableHead>
                         <TableRow>
                             <TableCell align="left">Serial</TableCell>
-                            <TableCell align="left">Solicitante</TableCell>
                             <TableCell align="left">Dirigido A</TableCell>
-                            <TableCell align="left">Fecha de Creación</TableCell>
-                            <TableCell align="left">Status</TableCell>
-                            <TableCell align="left">Respuesta</TableCell>
-                            <TableCell align="left">Serial Respuesta</TableCell>
-                            <TableCell align="left"></TableCell>
+                            <TableCell align="left">Título</TableCell>
+                            <TableCell align="left">
+                                Fecha de Creación
+                            </TableCell>
+                            <TableCell align="left">
+                                Fecha de Aprobación
+                            </TableCell>
+                            <TableCell align="left">Fecha de Envío</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -93,37 +78,25 @@ export default function DocumentIndex({ auth, documents, created_at, flash }) {
                                     </Link>
                                 </TableCell>
                                 <TableCell align="left">
-                                    {document.applicant.name}
+                                    {document.directed_to.name}
                                 </TableCell>
                                 <TableCell align="left">
-                                    {document.directed_to.name}
+                                    {document.title}
                                 </TableCell>
                                 <TableCell align="left">
                                     {created_at[document.id]}
                                 </TableCell>
-                                <TableCell>
-                                    <Badge textContent={document.status}/>
+                                <TableCell align="left">
+                                    {document.approved_at}
                                 </TableCell>
-                                <TableCell>
-                                    {document.has_response ? "REQUERIDA" : "NO REQUERIDA"}
+                                <TableCell align="left">
+                                    {document.sent_at}
                                 </TableCell>
-                                <TableCell>
-                                    {document.response_id ? document.response_id.serial_number : null}
-                                </TableCell>
-                                {isDirector && (
-
-                                    <TableCell align="right">
-                                    <div className="flex justify-end flex-col sm:flex-row gap-2">
-                                        <DeleteDialog document={document} />
-                                    </div>
-                                    </TableCell>
-
-                                )}
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-        </DocumentLayout>
+        </AdminLayout>
     );
 }
