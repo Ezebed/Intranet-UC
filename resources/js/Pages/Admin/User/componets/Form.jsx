@@ -28,6 +28,7 @@ export default function Form({user,userRoles,roles,routeName,method,passwordRequ
         roles: userRoles ?? [],
         email: user?.email ?? '',
         password:'',
+        internal_position: document?.internal_position ?? '',
         remember: false,
     })
 
@@ -101,6 +102,19 @@ export default function Form({user,userRoles,roles,routeName,method,passwordRequ
                     helperText={errors.email}
                     fullWidth
                 />
+
+                <TextField
+                    variant="outlined"
+                    type="text"
+                    id="internal_position"
+                    label="Cargo Interno"
+                    defaultValue={data.internal_position}
+                    onChange={handleChange}
+                    error={errors.internal_position}
+                    helperText={errors.internal_position}
+                    fullWidth
+                />
+
                 <FormControl variant="outlined">
                     <InputLabel htmlFor="password">Contraseña</InputLabel>
                     <OutlinedInput
