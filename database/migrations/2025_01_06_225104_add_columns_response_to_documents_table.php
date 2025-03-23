@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('documents', function (Blueprint $table) {
             $table->boolean('has_response')->default(false);
-            $table->foreignId('response_id')->nullable()->constrained('document_responses');
+            $table->foreignId('response_id')->nullable()->constrained(table:'document_responses');
         });
     }
 
