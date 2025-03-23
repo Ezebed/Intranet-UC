@@ -12,12 +12,13 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
+import { useTranslation } from "react-i18next";
+
 export default function DocumentIndex({ auth, documents, created_at }) {
     const isAdmin = auth.permissions.find(
         (permission) => permission.name === "isAdmin"
     );
     const paperElevation = 5;
-
 
     return (
         <AdminLayout auth={auth}>
@@ -27,7 +28,9 @@ export default function DocumentIndex({ auth, documents, created_at }) {
                 <h2 className="text-xl text-gray-500">Documentos</h2>
                 <Link href="#">
                     <Button variant="contained" startIcon={<AddRoundedIcon />}>
-                        Crear
+                        {t("button.create field", {
+                            field: "Documento",
+                        })}
                     </Button>
                 </Link>
             </div>
