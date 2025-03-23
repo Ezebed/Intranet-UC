@@ -9,7 +9,6 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\DocumentResponseController;
 
 
 Route::get('/', function () {
@@ -33,8 +32,6 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth','verified'])->group(function(){
     Route::get('/hola',function(){ return Inertia::render('holaMundo'); })->name('hola');
-    
-    Route::patch('/document/{id}/change-status', [DocumentController::class, 'changeStatus'])->name('document.changeStatus');
 
     Route::resource('/admin/role', RoleController::class )
             ->only(['index','create','store','edit','update','destroy'])
@@ -49,12 +46,8 @@ Route::middleware(['auth','verified'])->group(function(){
             ->names('admin.user');
 
     Route::resource('/document', DocumentController::class )
-        ->only(['index','create','show','store','edit','update','destroy'])
+        ->only(['index','create','show','edit','update','destroy'])
         ->names('document');
-
-    Route::resource('/response', DocumentResponseController::class )
-        ->only(['index','create','show','store','edit','update','destroy'])
-        ->names('response');
 
 });
 
