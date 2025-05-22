@@ -18,7 +18,7 @@
  */
 const drawerRoutesList = [
     {
-        permissionNeeded: "isAdmin",
+        permissionNeeded: null,
         subHeaderText: "Navegacion",
         routes: [
             {

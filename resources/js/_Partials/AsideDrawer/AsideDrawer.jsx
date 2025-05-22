@@ -50,8 +50,9 @@ export default function AsideDrawer({ auth, drawerWidth }) {
              * Verifica si el permiso necesario está presente en la lista de permisos.
              *
              * @param {string} permissionNeeded - El nombre del permiso que se necesita verificar.
-             * @returns {boolean} Retorna true si el permiso está presente, de lo contrario false.
+             * @returns {boolean} Retorna true si el permiso está presente o es null, de lo contrario false.
              */
+            if (!permissionNeeded) return true;
             return permissions.some(
                 (permission) => permission.name === permissionNeeded
             );
