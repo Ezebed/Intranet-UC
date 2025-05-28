@@ -19,7 +19,7 @@
 
 > Node.js
 
-> Composer 
+> Composer
 
 ## Iniciar laravel en local
 
@@ -28,6 +28,7 @@ entramos en la carpeta del proyecto
 ```bash
 cd Intranet-UC
 ```
+
 instalamos las dependencias del proyecto
 
 ```bash
@@ -57,10 +58,20 @@ DB_DATABASE=laravel
 DB_USERNAME=root
 DB_PASSWORD=
 ```
+
 una vez rellenada las credenciales y configurado la AppServiceProvider (solo en caso de ser necesario) migramos la base de datos
 
 ```bash
 php artisan migrate --seed
+```
+
+> [!IMPORTANT]
+> En caso de caso de Ocurrir algun error relacionado con PHP verificar que las siguientes extensiones esten descomentadas en el php.ini
+
+```text
+extension=pdo_mysql <----- para la base de datos
+extension=openssl <------ encriptacion
+extension_dir = "ext" <----- necesario para encontrar la capeta de extenciones C:/../php/ext/extension.dll
 ```
 
 iniciamos el servidor local
