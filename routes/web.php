@@ -9,7 +9,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentController;
-
+use App\Http\Controllers\Employees\StaffTypeController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -49,6 +49,12 @@ Route::middleware(['auth','verified'])->group(function(){
         ->only(['index','create','show','edit','update','destroy'])
         ->names('document');
 
+    Route::resource('/staff-type',StaffTypeController::class)
+        ->except(['create','edit'])
+        ->names('staff.type');
+
 });
+
+
 
 require __DIR__.'/auth.php';
