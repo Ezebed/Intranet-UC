@@ -10,6 +10,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\Employees\StaffTypeController;
+use App\Http\Controllers\Employees\StaffController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -49,9 +50,13 @@ Route::middleware(['auth','verified'])->group(function(){
         ->only(['index','create','show','edit','update','destroy'])
         ->names('document');
 
-    Route::resource('/staff-type',StaffTypeController::class)
-        ->except(['create','edit'])
-        ->names('staff.type');
+    Route::resource('/employee-staff-type',StaffTypeController::class)
+        // ->except(['create','edit'])
+        ->names('employee.staff.type');
+
+    Route::resource('/employee-staff',StaffController::class)
+        // ->except(['create','edit'])
+        ->names('employee.staff');
 
 });
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('staff_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique(true);
+            $table->string('name')->unique(true); // Nombre del tipo de cargo
             $table->timestamps();
         });
     }

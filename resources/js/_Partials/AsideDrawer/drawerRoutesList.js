@@ -65,6 +65,16 @@ const drawerRoutesList = [
             },
         ],
     },
+    {
+        permissionNeeded: "isAdmin",
+        subHeaderText: "Empleados",
+        routes: [
+            {
+                linkText: "Cargos",
+                routeName: "employee.staff.index",
+            },
+        ],
+    },
 ];
 
 export default drawerRoutesList;
