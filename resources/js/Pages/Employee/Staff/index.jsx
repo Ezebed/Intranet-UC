@@ -11,8 +11,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-
+import Dropdown from "@/Components/Dropdown";
 import { useTranslation } from "react-i18next";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faGripLines } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function StaffIndex({ auth, staffs, created_at }) {
@@ -22,12 +24,50 @@ export default function StaffIndex({ auth, staffs, created_at }) {
     const paperElevation = 5;
     const { t } = useTranslation(["common"]);
 
+    const dropDownSpanStyle = {
+        fontSize:'40px',
+        color:'#7267EF'
+    }
+
+    const dropDownContentStyle = {
+        fontSize: '20px'
+    }
+
     return (
         <AdminLayout auth={auth}>
-            <Head title="Oficios" />
+            <Head title="Cargos" />
 
-            <div className="flex justify-between items-center">
-                <h2 className="text-xl text-gray-500">Cargos</h2>
+            <Dropdown>
+                <Dropdown.Trigger>
+                    <span style={dropDownSpanStyle}>
+                        <FontAwesomeIcon icon={faGripLines}  />
+                    </span>
+                </Dropdown.Trigger>
+
+                <Dropdown.Content align="left" style={dropDownContentStyle}>
+                    <Dropdown.Link
+                        href={route("profile.edit")}
+                    >
+                        {t("Tipología de cargos")}
+                    </Dropdown.Link>
+                    <Dropdown.Link
+                        href={route("logout")}
+                        method="post"
+                        as="button"
+                    >
+                        {t("Beneficios")}
+                    </Dropdown.Link>
+                    <Dropdown.Link
+                        href={route("logout")}
+                        method="post"
+                        as="button"
+                    >
+                        {t("Niveles de docencia")}
+                    </Dropdown.Link>
+                </Dropdown.Content>
+            </Dropdown>
+            <div className="flex justify-between items-center mt-5">
+                <h2 className="text-xl text-gray-500"></h2>
                 <Link href={route("employee.staff.create")}>
                     <Button variant="contained" startIcon={<AddRoundedIcon />}>
                         {t("button.create field", {
