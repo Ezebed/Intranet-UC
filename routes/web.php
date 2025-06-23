@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -9,7 +10,9 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentController;
-
+use App\Http\Controllers\Thesis\ThesisStudentController;
+use App\Http\Controllers\Thesis\StudentStatusesController;
+use App\Http\Controllers\Thesis\ThesisController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -49,6 +52,20 @@ Route::middleware(['auth','verified'])->group(function(){
         ->only(['index','create','show','edit','update','destroy'])
         ->names('document');
 
+    Route::resource('/thesis/thesisStudent', ThesisStudentController::class )
+        ->only(['index','create','store','edit','update','destroy'])
+        ->names('thesisStudent');
+
+    Route::post('/thesis/thesisStudent/import-excel', [ThesisStudentController::class, 'importExcel'])
+    ->name('thesisStudent.importExcel');
+
+    Route::resource('/thesis/studentStatuses', StudentStatusesController::class )
+        ->only(['index','create','store','edit','update','destroy'])
+        ->names('studentStatuses');
+
+    Route::resource('/thesis/Thesis', ThesisController::class )
+        ->only(['index','create','store','edit','update','destroy'])
+        ->names('Thesis');
 });
 
 require __DIR__.'/auth.php';

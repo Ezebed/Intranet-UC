@@ -65,6 +65,24 @@ const drawerRoutesList = [
             },
         ],
     },
+        {
+        permissionNeeded: "isAdmin",
+        subHeaderText: "Proyectos PTEG/TEG",
+        routes: [
+            {
+                linkText: "Tesistas",
+                routeName: "thesisStudent.index",
+            },
+            {
+                linkText: "Estatus de estudiantes",
+                routeName: "studentStatuses.index",
+            },
+            {
+                linkText: "Proyectos PTEG/TEG",
+                routeName: "Thesis.index",
+            },
+        ],
+    },
 ];
 
 export default drawerRoutesList;
