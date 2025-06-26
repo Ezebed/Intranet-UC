@@ -11,6 +11,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\Employees\StaffTypeController;
 use App\Http\Controllers\Employees\StaffController;
+use App\Http\Controllers\Employees\BenefitController;
+use App\Http\Controllers\Employees\EmployeeController;
+use App\Http\Controllers\Employees\TeachingLevelController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -57,6 +60,16 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::resource('/employee-staff',StaffController::class)
         // ->except(['create','edit'])
         ->names('employee.staff');
+
+    Route::resource('/employee-benefit',BenefitController::class)
+        // ->except(['create','edit'])
+        ->names('employee.benefit');
+
+    Route::resource('/employee-teaching-level',TeachingLevelController::class)
+        ->names('employee.teaching.level');
+
+    Route::resource('/employee',EmployeeController::class)
+        ->names('employee');
 
 });
 

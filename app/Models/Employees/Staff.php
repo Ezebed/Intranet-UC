@@ -7,12 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Employees\StaffType;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\Employees\Benefit;
 
 class Staff extends Model
 {
     use HasFactory;
 
     protected $table = 'staffs';
+
+    protected $fillable = [
+        'name',
+        'type',
+        'places_number',
+    ];
 
     // Aplicamos una transformacion cada vez que obtenemos y establecemos el nombre
     protected function name(): Attribute
@@ -26,5 +34,10 @@ class Staff extends Model
     public function type(): BelongsTo
 	{
         return $this->belongsTo(StaffType::class,'type');
+    }
+
+    public function benefits(): BelongsToMany
+    {
+        return $this->belongsToMany(Benefit::class,'staff_benefits');
     }
 }

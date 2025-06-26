@@ -1,3 +1,4 @@
+
 import AdminLayout from "@/Layouts/AdminLayout";
 import { Head, Link, usePage } from "@inertiajs/react";
 import React from "react";
@@ -8,7 +9,7 @@ import EmployeeDropdownMenu from "../components/Dropdown";
 import EmployeeRecordsTable from "../components/Table";
 
 
-export default function StaffIndex({ auth, staffs, model, flash }) {
+export default function EmployeeBenefitIndex({ auth, benefits, model, flash }) {
     const isAdmin = auth.permissions.find(
         (permission) => permission.name === "isAdmin"
     );
@@ -16,32 +17,32 @@ export default function StaffIndex({ auth, staffs, model, flash }) {
 
     const links = [
         {route:'employee.staff.type.index',title:'Tipología de cargos'},
-        {route:'employee.benefit.index',title:'Beneficios'},
+        {route:'employee.staff.index',title:'Cargos'},
         {route:'employee.teaching.level.index',title:'Niveles de docencia'}
     ]
 
-    const tableHeaders = ['Nombre','Tipo','Nro. puestos']
-    const tableRows = staffs.map( staff => {
+    const tableHeaders = ['Nombre','Duración','Tiempo entre uso']
+    const tableRows = benefits.map( benefit => {
         return {
-            id:staff.id,
-            name:staff.name,
-            type:staff.type.name,
-            places_number: staff.places_number
+            id:benefit.id,
+            name:benefit.name,
+            time_lapse:`${benefit.time_lapse} ${benefit.time_lapse_unit.name}`,
+            time_between_use:`${benefit.time_between_use} ${benefit.time_between_use_unit.name}`,
         }
     } )
 
     return (
         <AdminLayout auth={auth}>
-            <Head title="Cargos" />
+            <Head title="Beneficios" />
 
-            <EmployeeDropdownMenu links={links} auth={auth} model={'employee.staff'} />
+            <EmployeeDropdownMenu links={links} auth={auth} model={'employee.benefit'} />
 
             <div className="flex justify-between items-center mt-5">
                 <h2 className="text-xl text-gray-500"></h2>
-                <Link href={route("employee.staff.create")}>
+                <Link href={route("employee.benefit.create")}>
                     <Button variant="contained" startIcon={<AddRoundedIcon />}>
                         {t("button.create field", {
-                            field: t("cargo", { count: 1 }),
+                            field: t("Beneficio", { count: 1 }),
                         })}
                     </Button>
                 </Link>

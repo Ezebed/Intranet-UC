@@ -11,13 +11,15 @@ import Tooltip from "@mui/material/Tooltip";
 import { useTranslation } from "react-i18next";
 import EmployeeRecordForm from "../components/Form";
 
-export default function StaffCreate({ auth, types }) {
+export default function EmployeeBenefitCreate({ auth, time_units }) {
     const { t } = useTranslation(["common"]);
 
     const dataFormObject = {
         name: '',
-        places_number: 1,
-        type: 1,
+        time_lapse:1,
+        time_lapse_unit:1,
+        time_between_use: 1,
+        time_between_use_unit: 1,
     }
 
     const structureFormObject = {
@@ -30,8 +32,27 @@ export default function StaffCreate({ auth, types }) {
                 maxWidth: 600
             }
         },
-        places_number: {
-            name:'Nro. puestos',
+        time_lapse:{
+            name: 'Duración',
+            hidden: false,
+            inputType: 'number',
+            sx:{
+                m:1,
+                maxWidth: 600
+            }
+        },
+        time_lapse_unit:{
+            name: 'Unidad de tiempo de duración',
+            hidden: false,
+            inputType: 'select',
+            selectList: time_units,
+            sx:{
+                m:1,
+                maxWidth: 600
+            }
+        },
+        time_between_use: {
+            name:'Tiempo entre usos',
             hidden: false,
             inputType: 'number',
             sx:{
@@ -39,11 +60,11 @@ export default function StaffCreate({ auth, types }) {
                 maxWidth: 150
             }
         },
-        type:{
-            name:'Tipo',
+        time_between_use_unit:{
+            name:'Unidad de tiempo entre usos',
             hidden:false,
             inputType: 'select',
-            selectList: types,
+            selectList: time_units,
             sx:{
                 m:1,
                 maxWidth:150
@@ -56,17 +77,17 @@ export default function StaffCreate({ auth, types }) {
         <AdminLayout auth={auth}>
             <Head
                 title={t("button.create field", {
-                    field: t("Cargo", { count: 1 }),
+                    field: t("Beneficio", { count: 1 }),
                 })}
             />
 
             <div className="flex justify-between items-center">
                 <h2 className="text-xl text-gray-500">
                     {t("button.create field", {
-                        field: t("Cargo", { count: 1 }),
+                        field: t("Beneficio", { count: 1 }),
                     })}
                 </h2>
-                <Link href={route("employee.staff.index")}>
+                <Link href={route("employee.benefit.index")}>
                     <Tooltip title={t("button.go back")}>
                         <IconButton size="large">
                             <ArrowCircleLeftRoundedIcon fontSize="inherit" />
@@ -78,7 +99,7 @@ export default function StaffCreate({ auth, types }) {
             <EmployeeRecordForm
                 dataFormObject={dataFormObject}
                 method="post"
-                routeName="employee.staff.store"
+                routeName="employee.benefit.store"
                 structureFormObject={structureFormObject}
             />
         </AdminLayout>

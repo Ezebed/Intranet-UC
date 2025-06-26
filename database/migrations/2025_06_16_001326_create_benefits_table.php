@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string("name")->nullable(false)->unique(true);
             $table->integer("time_between_use")->nullable(false)->default(1);
+            $table->integer("time_lapse")->nullable(false)->default(1);
             
             $table->unsignedBigInteger("time_between_use_unit")->nullable(false);
             $table->foreign("time_between_use_unit")->references("id")->on("time_units")->onDelete("cascade");
             
-            $table->unsignedBigInteger("staff")->nullable(false);
-            $table->foreign("staff")->references("id")->on("staffs")->onDelete("cascade");
+            $table->unsignedBigInteger("time_lapse_unit")->nullable(false);
+            $table->foreign("time_lapse_unit")->references("id")->on("time_units")->onDelete("cascade");
 
             $table->timestamps();
         });

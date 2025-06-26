@@ -11,63 +11,52 @@ import Tooltip from "@mui/material/Tooltip";
 import { useTranslation } from "react-i18next";
 import EmployeeRecordForm from "../components/Form";
 
-export default function StaffCreate({ auth, types }) {
-    const { t } = useTranslation(["common"]);
-
+export default function EmployeeStaffTypeEdit({ auth, type }) {
+    const { t } = useTranslation(["translation", "common"]);
+    
     const dataFormObject = {
-        name: '',
-        places_number: 1,
-        type: 1,
+        id: type.id,
+        name: type.name
     }
 
     const structureFormObject = {
+        id:{
+            name:'id',
+            inputType: 'hidden',
+            sx:{}
+        },
         name:{
             name: 'Nombre',
-            hidden: false,
             inputType: 'text',
             sx:{
                 m:1,
                 maxWidth: 600
             }
         },
-        places_number: {
-            name:'Nro. puestos',
-            hidden: false,
-            inputType: 'number',
-            sx:{
-                m:1,
-                maxWidth: 150
-            }
-        },
-        type:{
-            name:'Tipo',
-            hidden:false,
-            inputType: 'select',
-            selectList: types,
-            sx:{
-                m:1,
-                maxWidth:150
-            }
-        }
-
     }
-    
+
+
     return (
         <AdminLayout auth={auth}>
             <Head
-                title={t("button.create field", {
-                    field: t("Cargo", { count: 1 }),
+                title={t("Edit resource", {
+                    resource: t("Tipo de cargo", {
+                        count: 1,
+                        ns: "common",
+                    }),
                 })}
             />
-
             <div className="flex justify-between items-center">
                 <h2 className="text-xl text-gray-500">
-                    {t("button.create field", {
-                        field: t("Cargo", { count: 1 }),
+                    {t("Edit resource", {
+                        resource: t("Tipo de cargo", {
+                            count: 1,
+                            ns: "common",
+                        }),
                     })}
                 </h2>
-                <Link href={route("employee.staff.index")}>
-                    <Tooltip title={t("button.go back")}>
+                <Link href={route("employee.staff.type.index")}>
+                    <Tooltip title={t("button.go back", { ns: "common" })}>
                         <IconButton size="large">
                             <ArrowCircleLeftRoundedIcon fontSize="inherit" />
                         </IconButton>
@@ -75,12 +64,12 @@ export default function StaffCreate({ auth, types }) {
                 </Link>
             </div>
 
-            <EmployeeRecordForm
+            <EmployeeRecordForm 
                 dataFormObject={dataFormObject}
-                method="post"
-                routeName="employee.staff.store"
+                method="patch"
+                routeName="employee.staff.type.update"
                 structureFormObject={structureFormObject}
-            />
+                />
         </AdminLayout>
     );
 }
