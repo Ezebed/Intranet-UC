@@ -17,8 +17,8 @@ return new class extends Migration
             $table->integer('time')->default(1)->nullable(false);
             $table->unsignedBigInteger('time_unit')->nullable(false);
             $table->foreign('time_unit')->references('id')->on('time_units')->onDelete('cascade');
-            $table->unsignedBigInteger('staff')->nullable(false);
-            $table->foreign('staff')->references('id')->on('staffs')->onDelete('cascade');
+            $table->unsignedBigInteger('previous_level')->nullable(true);
+            $table->foreign('previous_level')->references('id')->on('teaching_levels')->onDelete('cascade');
             $table->timestamps();
         });
     }

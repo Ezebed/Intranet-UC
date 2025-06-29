@@ -14,6 +14,13 @@ class TeachingLevel extends Model
 
     protected $table = "teaching_levels";
 
+    protected $fillable = [
+        "name",
+        "time_unit",
+        "time",
+        "previous_level"
+    ];
+
     protected function name(): Attribute
     {
         return Attribute::make(
@@ -25,6 +32,11 @@ class TeachingLevel extends Model
     public function time_unit():BelongsTo
     {
         return $this->belongsTo(TimeUnit::class,"time_unit");
+    }
+
+    public function previous_level():BelongsTo
+    {
+        return $this->belongsTo(TeachingLevel::class,"previous_level");
     }
 
     protected function time():Attribute
