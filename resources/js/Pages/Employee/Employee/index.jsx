@@ -6,43 +6,41 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { useTranslation } from "react-i18next";
 import EmployeeDropdownMenu from "../components/Dropdown";
 import EmployeeRecordsTable from "../components/Table";
+import EmployeeRecordForm from "../components/Form";
 
 
-export default function StaffIndex({ auth, staffs, model, flash }) {
+export default function EmployeeIndex({ auth, employees, model, flash }) {
     const isAdmin = auth.permissions.find(
         (permission) => permission.name === "isAdmin"
     );
     const { t } = useTranslation(["common"]);
 
     const links = [
-        {route:'employee.staff.type.index',title:'Tipología de cargos'},
-        {route:'employee.staff.index',title:'Cargos'},
-        {route:'employee.benefit.index',title:'Beneficios'},
-        {route:'employee.teaching.level.index',title:'Niveles de docencia'}
+        {route:'employee.index',title:'Empleados'},
     ]
 
     const tableHeaders = ['Nombre','Tipo','Nro. puestos']
-    const tableRows = staffs.map( staff => {
+    const tableRows = employees.map( EmployeeRecordForm => {
         return {
-            id:staff.id,
-            name:staff.name,
-            type:staff.type.name,
-            places_number: staff.places_number
+            id:EmployeeRecordForm.id,
+            name:EmployeeRecordForm.name,
+            type:EmployeeRecordForm.type.name,
+            places_number: EmployeeRecordForm.places_number
         }
     } )
 
     return (
         <AdminLayout auth={auth}>
-            <Head title="Cargos" />
+            <Head title="Empleados" />
 
-            <EmployeeDropdownMenu links={links} auth={auth} model={'employee.staff'} />
+            <EmployeeDropdownMenu links={links} auth={auth} model={'employee'} />
 
             <div className="flex justify-between items-center mt-5">
                 <h2 className="text-xl text-gray-500"></h2>
-                <Link href={route("employee.staff.create")}>
+                <Link href={route("employee.create")}>
                     <Button variant="contained" startIcon={<AddRoundedIcon />}>
                         {t("button.create field", {
-                            field: t("cargo", { count: 1 }),
+                            field: t("Empleado", { count: 1 }),
                         })}
                     </Button>
                 </Link>

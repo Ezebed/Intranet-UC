@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from '@inertiajs/react'
 
 import Box from '@mui/material/Box';
@@ -9,6 +9,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from "@mui/material/InputLabel";
 import Button from "@mui/material/Button";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 export default function EmployeeRecordForm({dataFormObject,structureFormObject,routeName,method})
 {
@@ -34,8 +37,26 @@ export default function EmployeeRecordForm({dataFormObject,structureFormObject,r
         }))
     }
 
+    const handleCheckboxChange = (e) => {
+        const val = isNaN(e.target.value) ? e.target.value.trim() : Number(e.target.value)
+        
+        if (e.target.checked) {
+            setData(prevData => ({
+                ...prevData,
+                [e.target.name]: [...(new Set([...prevData[e.target.name], val]))],
+            }))
+        }else{
+            setData(prevData => ({
+                ...prevData,
+                [e.target.name]: [...prevData[e.target.name].filter(id => id != val)],
+            }))
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        console.log(data)
 
         if(method === 'post') post(route(routeName));
         else patch(route(routeName,dataFormObject.id));
@@ -95,6 +116,29 @@ export default function EmployeeRecordForm({dataFormObject,structureFormObject,r
                                         </Select>
                                     </FormControl>
                                 </>
+                            )
+                        }
+
+                        {
+                            structureFormObject[key].inputType == 'checkbox'  && (
+                                <FormGroup sx={structureFormObject[key].sx} >
+                                    <FormLabel component="legend" >{structureFormObject[key].name}</FormLabel>
+                                    {structureFormObject[key].selectList.map(box => (
+                                        <FormControlLabel
+                                            key={box.id} 
+                                            control={
+                                                <Checkbox 
+                                                    checked={data[key].includes(box.id)} 
+                                                    onChange={handleCheckboxChange} 
+                                                    value={box.id} 
+                                                    name={key}
+
+                                                />
+                                            }
+                                            label={box.name}
+                                        />
+                                    ))}
+                                </FormGroup>
                             )
                         }
                     </React.Fragment>

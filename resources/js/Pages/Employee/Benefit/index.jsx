@@ -18,6 +18,7 @@ export default function EmployeeBenefitIndex({ auth, benefits, model, flash }) {
     const links = [
         {route:'employee.staff.type.index',title:'Tipología de cargos'},
         {route:'employee.staff.index',title:'Cargos'},
+        {route:'employee.benefit.index',title:'Beneficios'},
         {route:'employee.teaching.level.index',title:'Niveles de docencia'}
     ]
 

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Employees;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employees\Benefit;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Employees\Staff;
 use App\Models\Employees\StaffType;
+use App\Models\Employees\TeachingLevel;
 
 class StaffController extends Controller
 {
@@ -24,7 +26,11 @@ class StaffController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Employee/Staff/create',['types' => StaffType::all()]);
+        return Inertia::render('Employee/Staff/create',[
+            'types' => StaffType::all(),
+            'benefits' => Benefit::all(),
+            'teaching_levels' => TeachingLevel::all()
+        ]);
     }
 
     /**
@@ -46,12 +52,9 @@ class StaffController extends Controller
 
         $type = StaffType::find($request->input('type'));
         $staff->type()->associate($type);
+        $staff->teaching_levels()->sync($request->input('teaching_levels'));
+        $staff->benefits()->sync($request->input('benefits'));
         $staff->save();
-
-        // return Inertia::render('Employee/Staff/index',[
-        //     'staffs' => Staff::with('type')->get(),
-        //     'model' => 'employee.staff',
-        // ]);
 
         return to_route('employee.staff.index')->with('flash',[
             'alert' => [
@@ -76,8 +79,10 @@ class StaffController extends Controller
     public function edit(int $id)
     {
         return Inertia::render('Employee/Staff/edit',[
-            'staff' => Staff::with('type')->find($id),
-            'types' => StaffType::all()
+            'staff' => Staff::with(['type','benefits','teaching_levels'])->find($id),
+            'types' => StaffType::all(),
+            'teaching_levels' => TeachingLevel::all(),
+            'benefits' => Benefit::all()
         ]);
     }
 
@@ -100,6 +105,8 @@ class StaffController extends Controller
         $staff->type = $type->id;
         
         $staff->type()->associate($type);
+        $staff->teaching_levels()->sync($request->input('teaching_levels'));
+        $staff->benefits()->sync($request->input('benefits'));
         $staff->save();
 
         return to_route('employee.staff.index')->with('flash',[

@@ -11,14 +11,16 @@ import Tooltip from "@mui/material/Tooltip";
 import { useTranslation } from "react-i18next";
 import EmployeeRecordForm from "../components/Form";
 
-export default function EmployeeStaffEdit({ auth, staff, types }) {
+export default function EmployeeStaffEdit({ auth, staff, types, benefits, teaching_levels }) {
     const { t } = useTranslation(["translation", "common"]);
     
     const dataFormObject = {
         name: staff.name,
         places_number: staff.places_number,
         type: staff.type.id,
-        id: staff.id
+        id: staff.id,
+        teaching_levels: staff.teaching_levels.map(tl => tl.id),
+        benefits: staff.benefits.map(tl => tl.id),
     }
 
     const structureFormObject = {
@@ -47,6 +49,24 @@ export default function EmployeeStaffEdit({ auth, staff, types }) {
             name:'Tipo',
             inputType: 'select',
             selectList: types,
+            sx:{
+                m:1,
+                maxWidth:150
+            }
+        },
+        teaching_levels: {
+            name:'Niveles de docencia',
+            inputType: 'checkbox',
+            selectList: teaching_levels,
+            sx:{
+                m:1,
+                maxWidth:150
+            }
+        },
+        benefits: {
+            name:'Beneficios',
+            inputType: 'checkbox',
+            selectList: benefits,
             sx:{
                 m:1,
                 maxWidth:150

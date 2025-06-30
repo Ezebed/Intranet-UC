@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Employees\StaffType;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Employees\Benefit;
+use App\Models\Employees\TeachingLevel;
 
 class Staff extends Model
 {
@@ -20,6 +21,8 @@ class Staff extends Model
         'name',
         'type',
         'places_number',
+        'benefits',
+        'teaching_levels'
     ];
 
     // Aplicamos una transformacion cada vez que obtenemos y establecemos el nombre
@@ -39,5 +42,10 @@ class Staff extends Model
     public function benefits(): BelongsToMany
     {
         return $this->belongsToMany(Benefit::class,'staff_benefits');
+    }
+
+    public function teaching_levels(): BelongsToMany
+    {
+        return $this->belongsToMany(TeachingLevel::class,'staff_teaching_levels');
     }
 }

@@ -1,9 +1,6 @@
 import AdminLayout from "@/Layouts/AdminLayout";
 import { Head, Link, usePage } from "@inertiajs/react";
 import React from "react";
-
-import Button from "@mui/material/Button";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { useTranslation } from "react-i18next";
 import EmployeeDropdownMenu from "../components/Dropdown";
 import EmployeeRecordsTable from "../components/Table";
@@ -16,6 +13,7 @@ export default function StaffTypeIndex({ auth, types, flash }) {
     const { t } = useTranslation(["common"]);
 
     const links = [
+        {route:'employee.staff.type.index',title:'Tipología de cargos'},
         {route:'employee.staff.index',title:'Cargos'},
         {route:'employee.benefit.index',title:'Beneficios'},
         {route:'employee.teaching.level.index',title:'Niveles de docencia'}
