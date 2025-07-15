@@ -1,6 +1,8 @@
 import AdminLayout from "@/Layouts/AdminLayout";
 import { Head, Link, usePage } from "@inertiajs/react";
 import React from "react";
+import Button from "@mui/material/Button";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { useTranslation } from "react-i18next";
 import EmployeeDropdownMenu from "../components/Dropdown";
 import EmployeeRecordsTable from "../components/Table";
@@ -31,9 +33,9 @@ export default function StaffTypeIndex({ auth, types, flash }) {
         <AdminLayout auth={auth}>
             <Head title="Tipologia de cargos" />
 
-            <EmployeeDropdownMenu links={links} auth={auth} />
+            <EmployeeDropdownMenu links={links} auth={auth} model={"employee.staff.type"} />
 
-            {/* <div className="flex justify-between items-center mt-5">
+            <div className="flex justify-between items-center mt-5">
                 <h2 className="text-xl text-gray-500"></h2>
                 <Link href={route("employee.staff.type.create")}>
                     <Button variant="contained" startIcon={<AddRoundedIcon />}>
@@ -42,13 +44,13 @@ export default function StaffTypeIndex({ auth, types, flash }) {
                         })}
                     </Button>
                 </Link>
-            </div> */}
+            </div>
             
             <EmployeeRecordsTable 
                 headers={tableHeaders} 
                 rows={tableRows} 
                 model={'employee.staff.type'} 
-                canDelete={false} 
+                canDelete={true} 
                 alert={flash?.alert} 
                 />
             

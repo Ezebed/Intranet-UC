@@ -59,7 +59,7 @@ export default function EmployeeTeachingLevelEdit({ auth, level, time_units, lev
             selectList: [...[{id:0,name:""}],...levels],
             sx:{
                 m:1,
-                maxWidth:150
+                maxWidth:250
             }
         }
 

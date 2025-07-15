@@ -24,7 +24,7 @@ class StaffTypeController extends Controller
      */
     public function create()
     {
-        
+        return Inertia::render('Employee/StaffType/create');
     }
 
     /**
@@ -32,11 +32,21 @@ class StaffTypeController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:128|unique:staff_types,name',
+        ]);
+
         $newType = StaffType::create([
             "name" => $request->input('name')
         ]);
 
-        return response('Registro creado exitosamente',200);
+        return to_route('employee.staff.type.index')->with('flash',[
+            'alert' => [
+                'id' => $newType->id,
+                'message' => 'Beneficio creado correctamente.',
+                'severity' => 'success'
+            ]
+        ]);
     }
 
     /**

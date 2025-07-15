@@ -84,7 +84,7 @@ class TeachingLevelController extends Controller
     public function edit(int $id)
     {
         return Inertia::render('Employee/TeachingLevel/edit',[
-            'level' => TeachingLevel::with(['time_unit'])->find($id),
+            'level' => TeachingLevel::with(['time_unit','previous_level'])->find($id),
             'time_units' => TimeUnit::all(),
             'levels' => DB::table('teaching_levels')->where('id','<>',$id)->get(['id','name']),
         ]);

@@ -13,6 +13,7 @@ class StaffType extends Model
     use HasFactory;
 
     protected $table = "staff_types";
+    protected $fillable = ["name"];
 
     // Aplicamos una transformacion cada vez que obtenemos y establecemos el nombre
     protected function name(): Attribute
